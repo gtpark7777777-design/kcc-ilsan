@@ -1,0 +1,2440 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>윤상수 | KCC 오토모빌 일산 전시장 · Land Rover</title>
+
+<!-- 카카오톡/문자 링크 미리보기용 메타 태그 -->
+<meta property="og:type" content="profile">
+<meta property="og:title" content="윤상수 과장 | KCC 오토모빌 일산 전시장">
+<meta property="og:description" content="Range Rover · Defender · Discovery | 010-5714-0050 | yoonss@kcc.co.kr">
+<meta property="og:image" content="og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="theme-color" content="#1a1a1a">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@500;600;700;800&family=Saira:wght@600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  
+  :root {
+    --card-bg: #E5E1DA;
+    --ink: #131313;
+    --ink-soft: #1c1c1c;
+    --ink-mute: #6b6b6b;
+    --paper: #ffffff;
+    --paper-soft: #f6f5f2;
+    --line: #e5e3de;
+    --accent: #131313;
+    --tmap: #0086FF;
+    --kakao: #FEE500;
+    --naver: #03C75A;
+  }
+  
+  html, body { background: var(--paper-soft); }
+  
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 14px 14px 60px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  .container { max-width: 480px; margin: 0 auto; }
+  
+  /* ===== 명함 영역 ===== */
+  .business-card {
+    position: relative;
+    background: var(--card-bg);
+    aspect-ratio: 1.72 / 1;
+    width: 100%;
+    border-radius: 14px;
+    box-shadow:
+      0 24px 48px -16px rgba(20,20,20,0.18),
+      0 8px 16px -8px rgba(20,20,20,0.10),
+      0 1px 0 0 rgba(255,255,255,0.5) inset;
+    overflow: hidden;
+    margin-bottom: 12px;
+    animation: cardIn 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(12px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  
+  /* 미세 노이즈 텍스처 (종이 질감) */
+  .business-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(255,255,255,0.35) 0%, transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(0,0,0,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  .brand-stack {
+    position: absolute;
+    top: 8.5%;
+    right: 7%;
+    text-align: right;
+    z-index: 2;
+  }
+  
+  .brand-name {
+    font-family: 'Saira Semi Condensed', 'Saira', sans-serif;
+    font-weight: 700;
+    font-size: clamp(11.5px, 2.85vw, 17px);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--ink);
+    font-feature-settings: "kern" 1;
+  }
+  
+  .brand-divider {
+    width: 32px;
+    height: 1.5px;
+    background: var(--ink);
+    margin: 12px 0 12px auto;
+  }
+  
+  .card-content {
+    position: absolute;
+    left: 7%;
+    right: 7%;
+    bottom: 8.5%;
+    z-index: 2;
+  }
+  
+  .name-line {
+    font-family: 'Saira Semi Condensed', 'Pretendard', sans-serif;
+    font-weight: 700;
+    font-size: clamp(15.5px, 3.6vw, 22px);
+    margin-bottom: 8px;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+    font-feature-settings: "kern" 1;
+  }
+  
+  .info-line {
+    font-family: 'Saira Semi Condensed', 'Pretendard', sans-serif;
+    font-weight: 500;
+    font-size: clamp(10.5px, 2.2vw, 14px);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    letter-spacing: 0;
+    font-feature-settings: "kern" 1;
+  }
+  
+  .info-line.bold { font-weight: 600; color: var(--ink); }
+  
+  /* ===== 섹션 공통 ===== */
+  .section {
+    background: var(--paper);
+    border-radius: 16px;
+    padding: 16px 16px 18px;
+    margin-bottom: 12px;
+    border: 1px solid var(--line);
+  }
+  
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-mute);
+    letter-spacing: 0.12em;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  
+  /* ===== 시승 가능 차량 ===== */
+  .section-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  
+  .section-title-row .section-title {
+    margin-bottom: 0;
+  }
+  
+  .section-update {
+    font-size: 10px;
+    font-weight: 600;
+    color: #16a34a;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .section-update::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #16a34a;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+  
+  .td-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .td-loading {
+    text-align: center;
+    color: var(--ink-mute);
+    font-size: 12.5px;
+    padding: 28px 0;
+  }
+  
+  .td-empty {
+    text-align: center;
+    color: var(--ink-mute);
+    font-size: 12.5px;
+    padding: 20px 0;
+    background: var(--paper-soft);
+    border-radius: 10px;
+  }
+  
+  .td-card {
+    padding: 12px 14px;
+    background: var(--paper-soft);
+    border-radius: 11px;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+    border: 1px solid transparent;
+  }
+  
+  .td-card:active {
+    transform: scale(0.98);
+    background: #ebe9e4;
+  }
+  
+  .td-card.selected {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  
+  .td-card.selected .td-name,
+  .td-card.selected .td-trim,
+  .td-card.selected .td-meta {
+    color: #fff;
+  }
+  
+  .td-card.selected .td-meta {
+    opacity: 0.7;
+  }
+  
+  .td-name {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 2px;
+  }
+  
+  .td-trim {
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    letter-spacing: -0.005em;
+    margin-bottom: 5px;
+  }
+  
+  .td-meta {
+    font-size: 10.5px;
+    color: var(--ink-mute);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  
+  .td-tag {
+    padding: 2px 7px;
+    background: rgba(0,0,0,0.05);
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  
+  .td-card.selected .td-tag {
+    background: rgba(255,255,255,0.15);
+  }
+  
+  .td-cta {
+    width: 100%;
+    padding: 14px;
+    background: var(--ink);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    letter-spacing: -0.01em;
+    transition: background 0.2s ease, transform 0.12s ease;
+    box-shadow: 0 6px 20px -8px rgba(20,20,20,0.4);
+  }
+  
+  .td-cta:active { transform: scale(0.98); }
+  .td-cta:hover { background: #000; }
+  
+  /* ===== ONE CARE 섹션 (럭셔리 에디션) ===== */
+  .onecare-section {
+    background: linear-gradient(180deg, #fafaf8 0%, #ffffff 100%);
+    border: 1px solid #e8e6e0;
+    padding: 22px 18px 20px;
+  }
+  
+  .onecare-header {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  
+  .onecare-eyebrow {
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-mute);
+    letter-spacing: 0.32em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  
+  .onecare-title {
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.025em;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  
+  .onecare-subtitle {
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+  
+  .onecare-pitch {
+    background: var(--ink);
+    color: #fff;
+    padding: 18px 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  .onecare-pitch-line {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  
+  .onecare-pitch-num {
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    font-feature-settings: "tnum" 1;
+  }
+  
+  .onecare-pitch-unit {
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 2px;
+    letter-spacing: -0.01em;
+  }
+  
+  .onecare-pitch-or {
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.04em;
+  }
+  
+  .onecare-pitch-desc {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: -0.005em;
+    line-height: 1.4;
+  }
+  
+  .onecare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid #e8e6e0;
+    border-left: 1px solid #e8e6e0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .onecare-item {
+    padding: 14px 13px 13px;
+    border-right: 1px solid #e8e6e0;
+    border-bottom: 1px solid #e8e6e0;
+    background: #fff;
+    position: relative;
+    transition: background 0.2s ease;
+  }
+  
+  .onecare-item:hover {
+    background: var(--paper-soft);
+  }
+  
+  .onecare-num {
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ink-mute);
+    letter-spacing: 0.1em;
+    margin-bottom: 5px;
+    font-feature-settings: "tnum" 1;
+  }
+  
+  .onecare-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 3px;
+    line-height: 1.25;
+  }
+  
+  .onecare-desc {
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: -0.005em;
+    line-height: 1.35;
+  }
+  
+  .onecare-divider {
+    height: 1px;
+    background: #e8e6e0;
+    margin: 16px -2px 14px;
+  }
+  
+  .onecare-cta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  
+  .onecare-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 13px 12px;
+    border-radius: 11px;
+    text-decoration: none;
+    text-align: center;
+    transition: transform 0.12s ease, background 0.2s ease;
+  }
+  
+  .onecare-cta:active { transform: scale(0.97); }
+  
+  .onecare-cta-emergency {
+    background: var(--ink);
+    color: #fff;
+    border: 1.5px solid var(--ink);
+  }
+  
+  .onecare-cta-emergency:hover { background: #000; }
+  
+  .onecare-cta-service {
+    background: var(--ink);
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.18);
+  }
+  
+  .onecare-cta-service:hover { background: #000; }
+  
+  .onecare-cta-label {
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  
+  .onecare-cta-number {
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-feature-settings: "tnum" 1;
+  }
+  
+  /* ===== KCC AUTO GROUP 섹션 ===== */
+  .kcc-section {
+    background: #0e0e0e;
+    border: 1px solid #1f1f1f;
+    padding: 24px 18px 22px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .kcc-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212,175,99,0.4), transparent);
+  }
+  
+  .kcc-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .kcc-eyebrow {
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: #d4af63;
+    letter-spacing: 0.32em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  
+  .kcc-title {
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  
+  .kcc-claim {
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #d4af63;
+    letter-spacing: 0.18em;
+    margin-bottom: 6px;
+    padding: 6px 0;
+    border-top: 1px solid rgba(212,175,99,0.3);
+    border-bottom: 1px solid rgba(212,175,99,0.3);
+    display: inline-block;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  
+  .kcc-subtitle {
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    margin-top: 2px;
+  }
+  
+  .kcc-pitch {
+    text-align: center;
+    margin-bottom: 16px;
+    padding: 14px 12px;
+    background: rgba(212,175,99,0.08);
+    border: 1px solid rgba(212,175,99,0.2);
+    border-radius: 11px;
+  }
+  
+  .kcc-pitch-headline {
+    font-size: 13px;
+    font-weight: 700;
+    color: #d4af63;
+    letter-spacing: -0.01em;
+    line-height: 1.55;
+  }
+  
+  .kcc-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  
+  .kcc-benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 11px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  
+  .kcc-benefit-highlight {
+    background: rgba(212,175,99,0.1);
+    border: 1px solid rgba(212,175,99,0.3);
+    box-shadow: 0 0 0 1px rgba(212,175,99,0.05) inset;
+  }
+  
+  .kcc-benefit-highlight .kcc-benefit-mark {
+    color: #e8c478;
+  }
+  
+  .kcc-benefit-highlight .kcc-benefit-text strong {
+    color: #f4d896;
+  }
+  
+  .kcc-benefit-highlight .kcc-benefit-text span {
+    color: rgba(255,255,255,0.75);
+  }
+  
+  .kcc-benefit-mark {
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #d4af63;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+    padding-top: 1px;
+    font-feature-settings: "tnum" 1;
+  }
+  
+  .kcc-benefit-text {
+    flex: 1;
+  }
+  
+  .kcc-benefit-text strong {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.015em;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  
+  .kcc-benefit-text span {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.62);
+    letter-spacing: -0.005em;
+    line-height: 1.55;
+  }
+  
+  .kcc-tech-divider {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(212,175,99,0.85);
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin: 18px 0 14px;
+    position: relative;
+  }
+  
+  .kcc-tech-divider::before,
+  .kcc-tech-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+  
+  .kcc-tech-divider::before { left: 0; }
+  .kcc-tech-divider::after { right: 0; }
+  
+  .kcc-tech-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  
+  .kcc-tech-item {
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+  }
+  
+  .kcc-tech-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #d4af63;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  
+  .kcc-tech-desc {
+    font-size: 10.5px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: -0.005em;
+    line-height: 1.45;
+  }
+  
+  .kcc-network {
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+  }
+  
+  .kcc-network-label {
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    font-size: 9.5px;
+    font-weight: 700;
+    color: rgba(212,175,99,0.8);
+    letter-spacing: 0.18em;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  
+  .kcc-network-list {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+  }
+  
+  /* ===== 시승 캘린더 모달 ===== */
+  .calendar-modal {
+    background: var(--paper);
+    width: 100%;
+    max-width: 480px;
+    max-height: 92vh;
+    border-radius: 22px 22px 0 0;
+    padding: 22px 18px 24px;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  
+  .cal-step {
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+  }
+  
+  .cal-step.active {
+    display: flex;
+  }
+  
+  .cal-step-header {
+    margin-bottom: 14px;
+  }
+  
+  .cal-step-num {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--ink-mute);
+    letter-spacing: 0.12em;
+    margin-bottom: 4px;
+  }
+  
+  .cal-step-title {
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  
+  .cal-step-desc {
+    font-size: 12.5px;
+    color: var(--ink-mute);
+    margin-top: 4px;
+    letter-spacing: -0.005em;
+  }
+  
+  .cal-vehicle-list {
+    overflow-y: auto;
+    flex: 1;
+    margin: 0 -2px;
+    padding: 0 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  
+  .cal-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  
+  .cal-day {
+    aspect-ratio: 1 / 1.1;
+    border-radius: 10px;
+    background: var(--paper-soft);
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  
+  .cal-day-week {
+    font-size: 9.5px;
+    color: var(--ink-mute);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 1px;
+  }
+  
+  .cal-day-num {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  
+  .cal-day.weekend .cal-day-week { color: #d97706; }
+  
+  .cal-day.selected {
+    background: var(--ink);
+  }
+  
+  .cal-day.selected .cal-day-week,
+  .cal-day.selected .cal-day-num {
+    color: #fff;
+  }
+  
+  .cal-day.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+  
+  .cal-page-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 0 2px;
+  }
+  
+  .cal-page-btn {
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 8px;
+  }
+  
+  .cal-page-btn:disabled {
+    color: var(--ink-mute);
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  
+  .cal-page-btn:active:not(:disabled) {
+    background: var(--paper-soft);
+  }
+  
+  .cal-page-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  
+  .cal-times {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    overflow-y: auto;
+    flex: 1;
+    margin: 0 -2px;
+    padding: 0 2px;
+  }
+  
+  .cal-time {
+    padding: 12px;
+    border-radius: 10px;
+    background: var(--paper-soft);
+    border: none;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+    letter-spacing: -0.005em;
+  }
+  
+  .cal-time:active { transform: scale(0.97); }
+  .cal-time:hover { background: #ebe9e4; }
+  
+  .cal-time.selected {
+    background: var(--ink);
+    color: #fff;
+  }
+  
+  .cal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    flex: 1;
+    padding: 2px 2px 0;
+    margin: 0 -2px;
+  }
+  
+  .cal-form-summary {
+    background: var(--paper-soft);
+    padding: 13px 14px;
+    border-radius: 11px;
+    margin-bottom: 4px;
+  }
+  
+  .cal-form-summary-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 3px 0;
+  }
+  
+  .cal-form-summary-row strong {
+    font-size: 11px;
+    color: var(--ink-mute);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    min-width: 50px;
+  }
+  
+  .cal-form-summary-row span {
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  
+  .cal-input {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 11px;
+    background: var(--paper);
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    -webkit-appearance: none;
+  }
+  
+  .cal-input:focus {
+    outline: none;
+    border-color: var(--ink);
+  }
+  
+  .cal-input-label {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+    margin-bottom: 5px;
+    margin-top: 4px;
+  }
+  
+  .cal-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-shrink: 0;
+  }
+  
+  .cal-btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: -0.01em;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  
+  .cal-btn:active { transform: scale(0.97); }
+  
+  .cal-btn-back {
+    background: var(--paper);
+    color: var(--ink);
+    border: 1.5px solid var(--line);
+    flex: 0 0 80px;
+  }
+  
+  .cal-btn-primary {
+    background: var(--ink);
+    color: white;
+  }
+  
+  .cal-btn-primary:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+  
+  .cal-success {
+    text-align: center;
+    padding: 28px 16px;
+  }
+  
+  .cal-success-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: #16a34a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .cal-success-title {
+    font-size: 19px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+  
+  .cal-success-desc {
+    font-size: 13px;
+    color: var(--ink-mute);
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+  
+  .cal-success-detail {
+    background: var(--paper-soft);
+    border-radius: 12px;
+    padding: 14px 16px;
+    text-align: left;
+    margin-bottom: 16px;
+  }
+  
+  /* ===== 핵심 CTA ===== */
+  .cta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+    margin-bottom: 12px;
+  }
+  
+  .cta-button {
+    padding: 16px 12px;
+    border-radius: 14px;
+    border: none;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    transition: transform 0.12s ease, background 0.2s ease, box-shadow 0.2s ease;
+    letter-spacing: -0.01em;
+  }
+  
+  .cta-button:active { transform: scale(0.97); }
+  
+  .cta-primary {
+    background: #ffffff;
+    color: var(--ink);
+    box-shadow: 0 6px 20px -8px rgba(20,20,20,0.4);
+  }
+  .cta-primary:hover { background: #f5f5f5; }
+  
+  .cta-secondary {
+    background: #ffffff;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+    box-shadow: 0 6px 20px -8px rgba(20,20,20,0.4);
+  }
+  .cta-secondary:hover { background: #f5f5f5; }
+  
+  /* ===== 액션 그리드 ===== */
+  .action-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  
+  .action-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 4px 11px;
+    border-radius: 12px;
+    background: var(--paper-soft);
+    cursor: pointer;
+    transition: transform 0.1s ease, background 0.2s ease;
+    border: none;
+    color: inherit;
+    text-decoration: none;
+    font-family: inherit;
+  }
+  
+  .action-item:active {
+    transform: scale(0.95);
+    background: #ebe9e4;
+  }
+  
+  .action-icon {
+    width: 26px;
+    height: 26px;
+    margin-bottom: 7px;
+    color: var(--ink);
+  }
+  
+  .action-badge {
+    width: 26px; height: 26px;
+    margin-bottom: 7px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: -0.02em;
+  }
+  
+  .action-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink);
+    text-align: center;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  
+  /* ===== 주소 블록 ===== */
+  .map-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    background: var(--paper-soft);
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .map-pin {
+    flex-shrink: 0;
+    width: 38px; height: 38px;
+    background: var(--ink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  
+  .map-text strong {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    letter-spacing: -0.01em;
+  }
+  
+  .map-text span {
+    color: var(--ink-mute);
+    font-size: 12px;
+    letter-spacing: -0.005em;
+  }
+  
+  /* ===== QR 영역 ===== */
+  .qr-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 6px 4px;
+  }
+  
+  #qrcode {
+    flex-shrink: 0;
+    padding: 8px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    line-height: 0;
+  }
+  
+  #qrcode img, #qrcode canvas {
+    display: block;
+    border-radius: 4px;
+  }
+  
+  .qr-text {
+    flex: 1;
+    font-size: 12.5px;
+    color: var(--ink-mute);
+    line-height: 1.55;
+    letter-spacing: -0.005em;
+  }
+  
+  .qr-text strong {
+    display: block;
+    color: var(--ink);
+    font-size: 13.5px;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+  
+  /* ===== 푸터 ===== */
+  .footer {
+    text-align: center;
+    padding: 24px 0 0;
+    font-size: 10.5px;
+    color: #aaa;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+  }
+  
+  /* ===== 토스트 ===== */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: white;
+    padding: 13px 22px;
+    border-radius: 32px;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 1000;
+    pointer-events: none;
+    box-shadow: 0 12px 32px -8px rgba(0,0,0,0.4);
+    letter-spacing: -0.01em;
+  }
+  
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  
+  /* ===== 모달 ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 999;
+    backdrop-filter: blur(4px);
+  }
+  
+  .modal-overlay.show { display: flex; animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+  
+  .modal {
+    background: var(--paper);
+    width: 100%;
+    max-width: 480px;
+    border-radius: 22px 22px 0 0;
+    padding: 22px 20px 28px;
+    animation: slideUp 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  
+  .modal-grip {
+    width: 40px; height: 4px;
+    background: #ddd;
+    border-radius: 2px;
+    margin: 0 auto 18px;
+  }
+  
+  .modal-title {
+    font-size: 17px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+  
+  .modal-desc {
+    font-size: 13px;
+    color: var(--ink-mute);
+    margin-bottom: 18px;
+    letter-spacing: -0.005em;
+  }
+  
+  .modal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .modal-item {
+    padding: 14px 14px;
+    border-radius: 12px;
+    background: var(--paper-soft);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    transition: background 0.15s ease;
+  }
+  
+  .modal-item:active { background: #ebe9e4; }
+  
+  .modal-item-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  
+  .modal-item-text { flex: 1; }
+  .modal-item-text strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 1px;
+    letter-spacing: -0.01em;
+  }
+  .modal-item-text span {
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: -0.005em;
+  }
+  
+  .modal-close {
+    width: 100%;
+    margin-top: 14px;
+    padding: 14px;
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-mute);
+    cursor: pointer;
+    font-family: inherit;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ============ 명함 ============ -->
+  <div class="business-card" id="business-card">
+    <div class="brand-stack">
+      <div class="brand-name">RANGE ROVER</div>
+      <div class="brand-divider"></div>
+      <div class="brand-name">DEFENDER</div>
+      <div class="brand-divider"></div>
+      <div class="brand-name">DISCOVERY</div>
+    </div>
+    <div class="card-content">
+      <div class="name-line">윤상수 | Yoon, Sangsoo</div>
+      <div class="info-line bold">컨설턴트 | Sales Consultant (과장)</div>
+      <div class="info-line bold">일산 전시장 | KCC 오토모빌</div>
+      <div class="info-line">경기 고양시 일산동구 백마로 522 (10300)</div>
+      <div class="info-line">031-932-9489 | 010-5714-0050</div>
+      <div class="info-line">yoonss@kcc.co.kr</div>
+    </div>
+  </div>
+
+  <!-- ============ 핵심 CTA ============ -->
+  <div class="cta-row">
+    <button class="cta-button cta-primary" onclick="callMobile()" aria-label="휴대폰 통화">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      바로 통화
+    </button>
+    <button class="cta-button cta-secondary" onclick="saveContact()" aria-label="연락처 저장">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+      연락처 저장
+    </button>
+  </div>
+
+  <!-- ============ 바로가기 ============ -->
+  <div class="section">
+    <div class="section-title">CONTACT</div>
+    <div class="action-grid">
+      <button class="action-item" onclick="callOffice()">
+        <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg>
+        <span class="action-label">전시장 전화</span>
+      </button>
+      <button class="action-item" onclick="sendSMS()">
+        <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span class="action-label">문자</span>
+      </button>
+      <button class="action-item" onclick="sendEmail()">
+        <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span class="action-label">이메일</span>
+      </button>
+      <button class="action-item" onclick="openShareModal()">
+        <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        <span class="action-label">명함 공유</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============ 영업 서비스 ============ -->
+  <div class="section">
+    <div class="section-title">SALES SERVICE</div>
+    <div class="action-grid" style="grid-template-columns:repeat(4,1fr);">
+      <button class="action-item" onclick="quoteRequest()">
+        <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <span class="action-label">견적 문의</span>
+      </button>
+      <button class="action-item" onclick="openBrochure()">
+        <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <span class="action-label">브로셔</span>
+      </button>
+      <button class="action-item" onclick="openBlog()">
+        <div class="action-badge" style="background:#03C75A;color:white;">B</div>
+        <span class="action-label">블로그</span>
+      </button>
+      <button class="action-item" onclick="openKakaoChat()">
+        <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span class="action-label">카톡 상담</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============ 시승 가능 차량 ============ -->
+  <div class="section">
+    <div class="section-title-row">
+      <div class="section-title">TEST DRIVE AVAILABLE</div>
+      <div class="section-update" id="td-updated">실시간 업데이트</div>
+    </div>
+    <div id="td-vehicles" class="td-list">
+      <!-- JS로 동적 로딩 -->
+      <div class="td-loading">시승 차량 정보 불러오는 중...</div>
+    </div>
+    <button class="td-cta" onclick="openTestDriveCalendar()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      시승 예약하기
+    </button>
+  </div>
+
+  <!-- ============ ONE CARE ============ -->
+  <div class="section onecare-section">
+    <div class="onecare-header">
+      <div class="onecare-eyebrow">LAND ROVER</div>
+      <div class="onecare-title">One Care</div>
+      <div class="onecare-subtitle">5년 통합 프리미엄 케어 프로그램</div>
+    </div>
+    
+    <div class="onecare-pitch">
+      <div class="onecare-pitch-line">
+        <span class="onecare-pitch-num">5년</span>
+        <span class="onecare-pitch-or">또는</span>
+        <span class="onecare-pitch-num">200,000<span class="onecare-pitch-unit">km</span></span>
+      </div>
+      <div class="onecare-pitch-desc">랜드로버 프리미엄 사후관리</div>
+    </div>
+    
+    <div class="onecare-grid">
+      <div class="onecare-item">
+        <div class="onecare-num">01</div>
+        <div class="onecare-label">5년 보증</div>
+        <div class="onecare-desc">제조 결함 부품 무상 교체</div>
+      </div>
+      <div class="onecare-item">
+        <div class="onecare-num">02</div>
+        <div class="onecare-label">긴급 출동</div>
+        <div class="onecare-desc">24시간 즉시 대응</div>
+      </div>
+      <div class="onecare-item">
+        <div class="onecare-num">03</div>
+        <div class="onecare-label">자기부담금 지원</div>
+        <div class="onecare-desc">사고 수리 시 자부담 보상</div>
+      </div>
+      <div class="onecare-item">
+        <div class="onecare-num">04</div>
+        <div class="onecare-label">커넥티드 서비스</div>
+        <div class="onecare-desc">Connect Pro · SOTA · CarPlay</div>
+      </div>
+      <div class="onecare-item">
+        <div class="onecare-num">05</div>
+        <div class="onecare-label">픽업 &amp; 딜리버리</div>
+        <div class="onecare-desc">차량 수거·배송 무상 제공</div>
+      </div>
+      <div class="onecare-item">
+        <div class="onecare-num">06</div>
+        <div class="onecare-label">사고차 무상견인</div>
+        <div class="onecare-desc">공식 서비스센터 입고</div>
+      </div>
+      <div class="onecare-item">
+        <div class="onecare-num">07</div>
+        <div class="onecare-label">KEEP GOING</div>
+        <div class="onecare-desc">이동비 최대 30만원 지원</div>
+      </div>
+      <div class="onecare-item">
+        <div class="onecare-num">08</div>
+        <div class="onecare-label">서비스 플랜</div>
+        <div class="onecare-desc">소모품 교환·정기 점검</div>
+      </div>
+    </div>
+    
+    <div class="onecare-divider"></div>
+    
+    <div class="onecare-cta-row">
+      <a class="onecare-cta onecare-cta-emergency" href="tel:0803379696">
+        <div class="onecare-cta-label">긴급 출동 24h</div>
+        <div class="onecare-cta-number">080-337-9696</div>
+      </a>
+      <a class="onecare-cta onecare-cta-service" href="tel:0319264001">
+        <div class="onecare-cta-label">일산 서비스센터</div>
+        <div class="onecare-cta-number">031-926-4001</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============ KCC AUTOMOBILE ============ -->
+  <div class="section kcc-section">
+    <div class="kcc-header">
+      <div class="kcc-eyebrow">PREMIUM RETAILER</div>
+      <div class="kcc-title">KCC Automobile</div>
+      <div class="kcc-claim">NO.1 LAND ROVER RETAILER IN KOREA</div>
+      <div class="kcc-subtitle">국내 최대 랜드로버 공식 딜러사</div>
+    </div>
+    
+    <div class="kcc-pitch">
+      <div class="kcc-pitch-headline">다른 전시장에서는 받지 못하는<br>KCC오토모빌만의 5가지 혜택</div>
+    </div>
+    
+    <div class="kcc-benefits">
+      <div class="kcc-benefit">
+        <div class="kcc-benefit-mark">01</div>
+        <div class="kcc-benefit-text">
+          <strong>재구매 시 1% 추가 혜택</strong>
+          <span>한 번 KCC 오토그룹에서 구매하시면 다음 차도 1% 추가 우대. 1억 5천 차량 기준 150만원. KCC 오토그룹 6개 브랜드 어디로 갈아타셔도 동일 적용.</span>
+        </div>
+      </div>
+      <div class="kcc-benefit">
+        <div class="kcc-benefit-mark">02</div>
+        <div class="kcc-benefit-text">
+          <strong>KCC 오토그룹 우대 0.5% 추가 할인</strong>
+          <span>본인은 물론 부모·자녀·배우자 명의 구매에도 동일 적용. 1억 차량 기준 50만원, 2억 기준 100만원 추가 할인.</span>
+        </div>
+      </div>
+      <div class="kcc-benefit">
+        <div class="kcc-benefit-mark">03</div>
+        <div class="kcc-benefit-text">
+          <strong>내 차 안심 매각</strong>
+          <span>타시던 차도 KCC 인증 중고차 사업부에서 시세 그대로 매입. 신차 구매와 한 번에 처리, 별도로 중고차 시장 알아보지 않으셔도 됩니다.</span>
+        </div>
+      </div>
+      <div class="kcc-benefit">
+        <div class="kcc-benefit-mark">04</div>
+        <div class="kcc-benefit-text">
+          <strong>랜드로버 전담 컨설턴트</strong>
+          <span>본사 정식 교육 이수한 전문가의 1:1 맞춤 상담. 차종 비교부터 금융·리스 설계까지, 가장 유리한 조건을 직접 찾아드립니다.</span>
+        </div>
+      </div>
+      <div class="kcc-benefit">
+        <div class="kcc-benefit-mark">05</div>
+        <div class="kcc-benefit-text">
+          <strong>전국 어디서나 우선 입고</strong>
+          <span>출장·이사 가셔도 서초·강동·분당·성남·원주·제주 KCC 어디서든 동일 우대. 가까운 곳에서 신속 서비스 받으실 수 있습니다.</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="kcc-tech-divider">서비스 차원이 다릅니다</div>
+    
+    <div class="kcc-tech-grid">
+      <div class="kcc-tech-item">
+        <div class="kcc-tech-label">본사 인증 마스터 정비사</div>
+        <div class="kcc-tech-desc">글로벌 본사가 직접 인증한<br>최상위 등급 전문가가 정비</div>
+      </div>
+      <div class="kcc-tech-item">
+        <div class="kcc-tech-label">전기차 전담 엔지니어</div>
+        <div class="kcc-tech-desc">하이브리드·EV 정비도<br>특화 엔지니어가 직접 처리</div>
+      </div>
+      <div class="kcc-tech-item">
+        <div class="kcc-tech-label">알루미늄 차체 전용 복원</div>
+        <div class="kcc-tech-desc">랜드로버 전용 장비로<br>사고 후에도 신차 그대로</div>
+      </div>
+      <div class="kcc-tech-item">
+        <div class="kcc-tech-label">신차 수준 컬러 매칭</div>
+        <div class="kcc-tech-desc">조색 전문가의 정밀 도장<br>티 안 나는 완벽 복원</div>
+      </div>
+    </div>
+    
+    <div class="kcc-network">
+      <div class="kcc-network-label">KCC오토모빌 전국 네트워크</div>
+      <div class="kcc-network-list">서초 · 강동 · 분당 · 성남 · 일산 · 원주 · 제주</div>
+    </div>
+  </div>
+
+  <!-- ============ 길찾기 ============ -->
+  <div class="section">
+    <div class="section-title">LOCATION</div>
+    <div class="map-info">
+      <div class="map-pin">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="map-text">
+        <strong>KCC 오토모빌 일산 전시장</strong>
+        <span>경기 고양시 일산동구 백마로 522</span>
+      </div>
+    </div>
+    <div class="action-grid">
+      <button class="action-item" onclick="openTmap()">
+        <div class="action-badge" style="background:var(--tmap);color:white;">T</div>
+        <span class="action-label">티맵</span>
+      </button>
+      <button class="action-item" onclick="openKakaoMap()">
+        <div class="action-badge" style="background:var(--kakao);color:#1a1a1a;">K</div>
+        <span class="action-label">카카오맵</span>
+      </button>
+      <button class="action-item" onclick="openNaverMap()">
+        <div class="action-badge" style="background:var(--naver);color:white;">N</div>
+        <span class="action-label">네이버맵</span>
+      </button>
+      <button class="action-item" onclick="copyAddress()">
+        <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span class="action-label">주소 복사</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============ QR ============ -->
+  <div class="section">
+    <div class="section-title">QR CODE</div>
+    <div class="qr-section">
+      <div id="qrcode"></div>
+      <div class="qr-text">
+        <strong>QR 스캔으로 바로 공유</strong>
+        고객님께 QR을 보여주시면 명함 페이지가 즉시 열립니다. 연락처 저장도 한 번에.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 명함 이미지 저장 ============ -->
+  <div class="cta-row" style="grid-template-columns: 1fr;">
+    <button class="cta-button cta-secondary" onclick="downloadCardImage()">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      명함 이미지로 저장 (카톡·문자 발송용)
+    </button>
+  </div>
+
+  <div class="footer">KCC AUTOMOBILE · LAND ROVER ILSAN</div>
+</div>
+
+<!-- ============ 공유 모달 ============ -->
+<div class="modal-overlay" id="share-modal" onclick="closeShareModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-grip"></div>
+    <div class="modal-title">명함 공유하기</div>
+    <div class="modal-desc">카톡·문자에서 명함이 이미지로 보이게 하려면 ‘이미지로 저장 후 전송’을 추천드립니다.</div>
+    <div class="modal-list">
+      <button class="modal-item" onclick="shareImageDirect()">
+        <div class="modal-item-icon" style="background:#FEE500;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M12 3C6.48 3 2 6.48 2 10.8c0 2.76 1.86 5.18 4.66 6.6-.2.7-.74 2.6-.84 3-.13.5.18.5.38.36.16-.1 2.54-1.74 3.56-2.42.74.1 1.5.16 2.24.16 5.52 0 10-3.48 10-7.7S17.52 3 12 3z"/></svg>
+        </div>
+        <div class="modal-item-text">
+          <strong>명함 이미지로 저장 후 전송</strong>
+          <span>가장 깔끔하게 보입니다 (권장)</span>
+        </div>
+      </button>
+      <button class="modal-item" onclick="shareViaSystem()">
+        <div class="modal-item-icon" style="background:var(--ink);color:white;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </div>
+        <div class="modal-item-text">
+          <strong>링크로 공유</strong>
+          <span>카톡·문자·메일 등 어디든</span>
+        </div>
+      </button>
+      <button class="modal-item" onclick="copyLink()">
+        <div class="modal-item-icon" style="background:var(--paper-soft);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <div class="modal-item-text">
+          <strong>링크 복사</strong>
+          <span>주소창에 붙여넣기</span>
+        </div>
+      </button>
+    </div>
+    <button class="modal-close" onclick="closeShareModal()">닫기</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ============ 시승 예약 캘린더 모달 ============ -->
+<div class="modal-overlay" id="td-modal" onclick="closeTestDriveCalendar(event)">
+  <div class="modal calendar-modal" onclick="event.stopPropagation()">
+    <div class="modal-grip"></div>
+    
+    <!-- Step 1: 차량 선택 -->
+    <div class="cal-step active" id="cal-step-1">
+      <div class="cal-step-header">
+        <div class="cal-step-num">STEP 1 / 3</div>
+        <div class="cal-step-title">시승할 차량 선택</div>
+        <div class="cal-step-desc">시승 가능한 차량 중 하나를 선택해주세요.</div>
+      </div>
+      <div class="cal-vehicle-list" id="cal-vehicle-list">
+        <div class="td-loading">차량 정보 불러오는 중...</div>
+      </div>
+      <div class="cal-actions">
+        <button class="cal-btn cal-btn-back" onclick="closeTestDriveCalendar()">취소</button>
+      </div>
+    </div>
+    
+    <!-- Step 2: 날짜 + 시간 선택 -->
+    <div class="cal-step" id="cal-step-2">
+      <div class="cal-step-header">
+        <div class="cal-step-num">STEP 2 / 3</div>
+        <div class="cal-step-title">날짜와 시간 선택</div>
+        <div class="cal-step-desc">시승 시간은 60분이며, 평일·주말 모두 예약 가능합니다.</div>
+      </div>
+      <div class="cal-page-nav">
+        <button class="cal-page-btn" id="cal-prev" onclick="changeWeek(-1)">‹ 이전</button>
+        <span class="cal-page-label" id="cal-week-label">5월 1주차</span>
+        <button class="cal-page-btn" id="cal-next" onclick="changeWeek(1)">다음 ›</button>
+      </div>
+      <div class="cal-days" id="cal-days"></div>
+      <div class="cal-times" id="cal-times">
+        <div class="td-loading" style="grid-column: 1 / -1;">날짜를 먼저 선택해주세요.</div>
+      </div>
+      <div class="cal-actions">
+        <button class="cal-btn cal-btn-back" onclick="goCalStep(1)">‹ 이전</button>
+        <button class="cal-btn cal-btn-primary" id="cal-step2-next" disabled onclick="goCalStep(3)">다음</button>
+      </div>
+    </div>
+    
+    <!-- Step 3: 정보 입력 -->
+    <div class="cal-step" id="cal-step-3">
+      <div class="cal-step-header">
+        <div class="cal-step-num">STEP 3 / 3</div>
+        <div class="cal-step-title">예약 정보 입력</div>
+        <div class="cal-step-desc">예약이 확정되면 윤상수 과장에게 전달됩니다.</div>
+      </div>
+      <div class="cal-form">
+        <div class="cal-form-summary">
+          <div class="cal-form-summary-row"><strong>차량</strong><span id="sum-vehicle">-</span></div>
+          <div class="cal-form-summary-row"><strong>일시</strong><span id="sum-datetime">-</span></div>
+        </div>
+        <div>
+          <div class="cal-input-label">성함 *</div>
+          <input type="text" class="cal-input" id="td-name" placeholder="홍길동" autocomplete="name">
+        </div>
+        <div>
+          <div class="cal-input-label">연락처 *</div>
+          <input type="tel" class="cal-input" id="td-phone" placeholder="010-1234-5678" autocomplete="tel">
+        </div>
+        <div>
+          <div class="cal-input-label">희망 트림 · 색상 (선택)</div>
+          <input type="text" class="cal-input" id="td-memo" placeholder="예: P360 Dynamic SE / Santorini Black">
+        </div>
+      </div>
+      <div class="cal-actions">
+        <button class="cal-btn cal-btn-back" onclick="goCalStep(2)">‹ 이전</button>
+        <button class="cal-btn cal-btn-primary" onclick="submitTestDrive()">시승 예약 신청하기</button>
+      </div>
+    </div>
+    
+    <!-- Step 4: 완료 -->
+    <div class="cal-step" id="cal-step-4">
+      <div class="cal-success">
+        <div class="cal-success-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="cal-success-title">거의 다 됐어요!</div>
+        <div class="cal-success-desc" style="line-height:1.9;">
+          문자 앱이 열렸습니다.<br>
+          <strong style="font-size:16px;">전송 버튼만 눌러주시면<br>시승 예약이 완료됩니다.</strong><br>
+          <span style="color:#999;font-size:13px;">담당 컨설턴트가 확인 후 바로 연락드리겠습니다.</span>
+        </div>
+        <div class="cal-success-detail" id="cal-success-detail"></div>
+      </div>
+      <div class="cal-actions">
+        <button class="cal-btn cal-btn-back" onclick="submitTestDrive()" style="flex:1;">문자 다시 열기</button>
+        <button class="cal-btn cal-btn-primary" onclick="closeTestDriveCalendar()" style="flex:1;">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  // ===== 블로그/유튜브 =====
+  const BLOG_URL = 'https://blog.naver.com/landrover-mr-yoon';
+  function openBlog() {
+    window.open(BLOG_URL, '_blank', 'noopener');
+  }
+  
+  const CONTACT = {
+    name: '윤상수',
+    nameEn: 'Yoon, Sangsoo',
+    title: '컨설턴트 (과장)',
+    titleEn: 'Sales Consultant',
+    org: 'KCC 오토모빌 일산 전시장',
+    orgEn: 'KCC Automobile Ilsan Showroom',
+    address: '경기 고양시 일산동구 백마로 522',
+    postalCode: '10300',
+    office: '031-932-9489',
+    mobile: '010-5714-0050',
+    email: 'yoonss@kcc.co.kr',
+    placeQuery: 'KCC오토모빌 일산 전시장'
+  };
+  
+  // ===== Toast =====
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+  
+  // ===== Contact Actions =====
+  function callMobile() { window.location.href = `tel:${CONTACT.mobile.replace(/-/g,'')}`; }
+  function callOffice() { window.location.href = `tel:${CONTACT.office.replace(/-/g,'')}`; }
+  function sendSMS()    { window.location.href = `sms:${CONTACT.mobile.replace(/-/g,'')}`; }
+  function sendEmail()  { window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent('Land Rover 문의')}`; }
+  
+  // ===== vCard =====
+  function saveContact() {
+    const vcard = [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      `N:${CONTACT.name};;;;`,
+      `FN:${CONTACT.name} (${CONTACT.nameEn})`,
+      `ORG:${CONTACT.org}`,
+      `TITLE:${CONTACT.title}`,
+      `TEL;TYPE=CELL,VOICE:${CONTACT.mobile}`,
+      `TEL;TYPE=WORK,VOICE:${CONTACT.office}`,
+      `EMAIL;TYPE=WORK:${CONTACT.email}`,
+      `ADR;TYPE=WORK:;;${CONTACT.address};;;${CONTACT.postalCode};Korea`,
+      `URL:${window.location.href}`,
+      `NOTE:Land Rover Ilsan - Range Rover, Defender, Discovery`,
+      'END:VCARD'
+    ].join('\r\n');
+    
+    const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '윤상수_KCC오토모빌.vcf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    showToast('연락처 파일이 저장되었습니다');
+  }
+  
+  // ===== Map Apps =====
+  function tryAppLink(appUrl, fallbackUrl) {
+    const start = Date.now();
+    const timer = setTimeout(() => {
+      if (Date.now() - start < 2000) window.location.href = fallbackUrl;
+    }, 1500);
+    window.location.href = appUrl;
+    window.addEventListener('pagehide', () => clearTimeout(timer), { once: true });
+  }
+  
+  function openTmap() {
+    const q = encodeURIComponent(CONTACT.placeQuery);
+    tryAppLink(`tmap://search?name=${q}`, `https://surl.tmobiapi.com/d97deca3`);
+  }
+  function openKakaoMap() {
+    window.location.href = `https://map.kakao.com/link/search/${encodeURIComponent(CONTACT.placeQuery)}`;
+  }
+  function openNaverMap() {
+    const q = encodeURIComponent(CONTACT.placeQuery);
+    tryAppLink(`nmap://search?query=${q}&appname=kcc.ilsan.card`, `https://map.naver.com/p/search/${q}`);
+  }
+  
+  function copyAddress() {
+    const full = `${CONTACT.org}\n${CONTACT.address} (우 ${CONTACT.postalCode})`;
+    navigator.clipboard.writeText(full).then(() => showToast('주소가 복사되었습니다'))
+      .catch(() => showToast('복사에 실패했습니다'));
+  }
+  
+  // ===== Sales Service =====
+  function testDrive() {
+    openTestDriveCalendar();
+  }
+  
+  function quoteRequest() {
+    const subject = '[견적 문의] Land Rover';
+    const body = `안녕하세요, 윤상수 과장님.\n\n아래 차량 견적을 문의드립니다.\n\n■ 관심 차종: \n■ 트림/옵션: \n■ 구매 예정 시기: \n■ 금융/리스 여부: \n■ 성명: \n■ 연락처: \n\n감사합니다.`;
+    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+  
+  function openBrochure() {
+    window.open('../landrover_approach_book_2026.pdf', '_blank', 'noopener');
+  }
+  
+  // ===== 카톡 상담 =====
+  // 셋업: 오픈채팅방 URL을 아래에 채워주세요 (예: 'https://open.kakao.com/o/sXXXXXXXX')
+  const KAKAO_CHAT_URL = 'https://open.kakao.com/o/gWUv8Ssi';
+  
+  function openKakaoChat() {
+    if (!KAKAO_CHAT_URL) {
+      showToast('카톡 상담방 준비 중입니다');
+      return;
+    }
+    window.open(KAKAO_CHAT_URL, '_blank', 'noopener');
+  }
+  
+  function visitShowroom() {
+    // (deprecated - 카톡 상담으로 대체됨)
+    openKakaoChat();
+  }
+  
+  // ===== Share Modal =====
+  function openShareModal() { document.getElementById('share-modal').classList.add('show'); }
+  function closeShareModal(e) {
+    if (!e || e.target === e.currentTarget) document.getElementById('share-modal').classList.remove('show');
+  }
+  
+  function shareViaSystem() {
+    closeShareModal();
+    if (navigator.share) {
+      navigator.share({
+        title: '윤상수 | KCC 오토모빌 일산 전시장',
+        text: '랜드로버 일산 전시장 윤상수 과장 명함',
+        url: window.location.href
+      }).catch(()=>{});
+    } else {
+      copyLink();
+    }
+  }
+  
+  function copyLink() {
+    closeShareModal();
+    navigator.clipboard.writeText(window.location.href)
+      .then(() => showToast('링크가 복사되었습니다'))
+      .catch(() => showToast('복사에 실패했습니다'));
+  }
+  
+  function shareImageDirect() {
+    closeShareModal();
+    downloadCardImage(true);
+  }
+  
+  // ===== Card → PNG (고해상도 강제 렌더링) =====
+  function downloadCardImage(viaShare = false) {
+    showToast('이미지를 생성 중입니다...');
+    
+    // 화면 밖에 1500px 고정 크기로 명함 복제 → 항상 고해상도 보장
+    const original = document.getElementById('business-card');
+    const clone = original.cloneNode(true);
+    
+    const captureBox = document.createElement('div');
+    captureBox.style.cssText = `
+      position: fixed;
+      top: 0; left: -9999px;
+      width: 1500px;
+      pointer-events: none;
+      z-index: -1;
+    `;
+    
+    clone.style.cssText = `
+      width: 1500px;
+      max-width: 1500px;
+      margin: 0;
+      box-shadow: none;
+      border-radius: 0;
+      animation: none;
+      opacity: 1;
+      transform: none;
+    `;
+    clone.id = 'capture-card';
+    
+    // clamp() 폰트 크기를 1500px 기준 고정 px로 환산 (clamp의 max값 × 1500/480)
+    const brandNames = clone.querySelectorAll('.brand-name');
+    brandNames.forEach(el => {
+      el.style.fontSize = '53px';
+      el.style.fontWeight = '700';
+      el.style.letterSpacing = '0.04em';
+    });
+    const dividers = clone.querySelectorAll('.brand-divider');
+    dividers.forEach(el => {
+      el.style.width = '100px';
+      el.style.height = '4px';
+      el.style.margin = '38px 0 38px auto';
+    });
+    
+    const nameLine = clone.querySelector('.name-line');
+    if (nameLine) {
+      nameLine.style.fontSize = '69px';
+      nameLine.style.fontWeight = '700';
+      nameLine.style.marginBottom = '25px';
+      nameLine.style.color = '#131313';
+    }
+    
+    const infoLines = clone.querySelectorAll('.info-line');
+    infoLines.forEach(el => {
+      el.style.fontSize = '44px';
+      el.style.lineHeight = '1.55';
+      if (el.classList.contains('bold')) {
+        el.style.fontWeight = '600';
+        el.style.color = '#131313';
+      } else {
+        el.style.fontWeight = '500';
+        el.style.color = '#1c1c1c';
+      }
+    });
+    
+    captureBox.appendChild(clone);
+    document.body.appendChild(captureBox);
+    
+    const renderCapture = () => {
+      html2canvas(clone, {
+        scale: 2,                  // 1500 × 2 = 3000px 최종
+        backgroundColor: '#E5E1DA',
+        useCORS: true,
+        logging: false,
+        width: 1500,
+        windowWidth: 1500
+      }).then(canvas => {
+        if (captureBox.parentNode) document.body.removeChild(captureBox);
+        
+        if (viaShare && navigator.canShare) {
+          canvas.toBlob(blob => {
+            const file = new File([blob], '윤상수_명함.png', { type: 'image/png' });
+            if (navigator.canShare({ files: [file] })) {
+              navigator.share({
+                files: [file],
+                title: '윤상수 | KCC 오토모빌 일산',
+                text: '랜드로버 일산 윤상수 과장 명함입니다.'
+              }).catch(() => fallbackDownload(canvas));
+            } else {
+              fallbackDownload(canvas);
+            }
+          }, 'image/png');
+        } else {
+          fallbackDownload(canvas);
+        }
+      }).catch(err => {
+        if (captureBox.parentNode) document.body.removeChild(captureBox);
+        console.error(err);
+        showToast('이미지 저장에 실패했습니다');
+      });
+    };
+    
+    // 폰트 로딩 완료 후 캡처 (글자 흐림 방지)
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => setTimeout(renderCapture, 150));
+    } else {
+      setTimeout(renderCapture, 400);
+    }
+  }
+  
+  function fallbackDownload(canvas) {
+    const a = document.createElement('a');
+    a.download = '윤상수_명함.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+    showToast('명함 이미지가 저장되었습니다');
+  }
+  
+  // ===== QR =====
+  // ============================================================
+  // ===== 시승 가능 차량 + 예약 캘린더
+  // ============================================================
+  
+  // 구글 시트 게시 URL (CSV 형식)
+  // 셋업 가이드: testdrive-sheet-setup.md 참조
+  const TD_SHEET_URL = 'TESTDRIVE_SHEET_CSV_URL_HERE';
+  
+  // 시승 가능 차량 데이터
+  let TD_VEHICLES = [];
+  let TD_STATE = {
+    vehicle: null,
+    date: null,    // YYYY-MM-DD
+    time: null,    // HH:MM
+    weekOffset: 0  // 0 = 이번 주, 1 = 다음 주
+  };
+  
+  // ===== 페이지 로드 시 시승 차량 자동 불러오기 =====
+  async function loadTestDriveVehicles() {
+    const listEl = document.getElementById('td-vehicles');
+    
+    try {
+      // 구글 시트 URL이 미설정이면 기본 더미 데이터
+      if (TD_SHEET_URL === 'TESTDRIVE_SHEET_CSV_URL_HERE' || !TD_SHEET_URL) {
+        TD_VEHICLES = TD_FALLBACK;
+      } else {
+        const res = await fetch(TD_SHEET_URL);
+        if (!res.ok) throw new Error('Sheet fetch failed');
+        const csv = await res.text();
+        TD_VEHICLES = parseTDSheet(csv);
+      }
+      
+      renderTDVehicles();
+    } catch (err) {
+      console.error('시승 차량 로드 실패:', err);
+      TD_VEHICLES = TD_FALLBACK;
+      renderTDVehicles();
+    }
+  }
+  
+  // 데이터를 못 가져왔을 때 표시할 기본 차량 (지금은 일반적인 라인업)
+  const TD_FALLBACK = [
+    { model: 'Range Rover', trim: '', color: '', schedule: '평일+주말', duration: '60분', active: true },
+    { model: 'Range Rover Sport', trim: '', color: '', schedule: '평일+주말', duration: '60분', active: true },
+    { model: 'Range Rover Velar', trim: '', color: '', schedule: '평일+주말', duration: '60분', active: true },
+    { model: 'Range Rover Evoque', trim: '', color: '', schedule: '평일+주말', duration: '60분', active: true },
+    { model: 'Defender', trim: '', color: '', schedule: '평일+주말', duration: '60분', active: true },
+    { model: 'Discovery 5', trim: '', color: '', schedule: '평일+주말', duration: '60분', active: true },
+    { model: 'Discovery Sport', trim: '', color: '', schedule: '평일+주말', duration: '60분', active: true }
+  ];
+  
+  // CSV 파싱: 차종,트림,색상,가능시간대,소요시간,활성
+  function parseTDSheet(csv) {
+    const lines = csv.trim().split(/\r?\n/);
+    if (lines.length < 2) return [];
+    
+    return lines.slice(1).map(line => {
+      const cols = parseCSVLine(line);
+      if (cols.length < 5) return null;
+      const active = (cols[5] || '').trim().toUpperCase();
+      return {
+        model: (cols[0] || '').trim(),
+        trim: (cols[1] || '').trim(),
+        color: (cols[2] || '').trim(),
+        schedule: (cols[3] || '').trim() || '평일+주말',
+        duration: (cols[4] || '').trim() || '60분',
+        active: active === '✓' || active === 'TRUE' || active === 'Y' || active === '1' || active === ''
+      };
+    }).filter(v => v && v.model && v.active).slice(0, 7);
+  }
+  
+  function parseCSVLine(line) {
+    const result = [];
+    let cur = '';
+    let inQuote = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"' && !inQuote) { inQuote = true; }
+      else if (ch === '"' && inQuote) {
+        if (line[i+1] === '"') { cur += '"'; i++; }
+        else { inQuote = false; }
+      }
+      else if (ch === ',' && !inQuote) { result.push(cur); cur = ''; }
+      else { cur += ch; }
+    }
+    result.push(cur);
+    return result;
+  }
+  
+  // 시승 차량 목록 렌더 (메인 페이지)
+  function renderTDVehicles() {
+    const listEl = document.getElementById('td-vehicles');
+    
+    if (!TD_VEHICLES.length) {
+      listEl.innerHTML = '<div class="td-empty">현재 시승 가능 차량이 없습니다.<br>전화로 문의 부탁드립니다.</div>';
+      return;
+    }
+    
+    listEl.innerHTML = TD_VEHICLES.map((v, idx) => `
+      <div class="td-card" onclick="selectVehicleAndOpen(${idx})">
+        <div class="td-name">${escapeHtml(v.model)}</div>
+
+      </div>
+    `).join('');
+  }
+  
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  
+  // 차량 선택 후 캘린더 열기
+  function selectVehicleAndOpen(idx) {
+    TD_STATE.vehicle = TD_VEHICLES[idx];
+    openTestDriveCalendar();
+    goCalStep(2);
+    renderCalendarDays();
+  }
+  
+  // ===== 캘린더 모달 제어 =====
+  function openTestDriveCalendar() {
+    document.getElementById('td-modal').classList.add('show');
+    if (!TD_STATE.vehicle) {
+      goCalStep(1);
+      renderCalVehicleList();
+    }
+  }
+  
+  function closeTestDriveCalendar(e) {
+    if (!e || e.target === e.currentTarget) {
+      document.getElementById('td-modal').classList.remove('show');
+      // 상태 초기화
+      setTimeout(() => {
+        TD_STATE = { vehicle: null, date: null, time: null, weekOffset: 0 };
+        ['td-name', 'td-phone', 'td-memo'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.value = '';
+        });
+        goCalStep(1);
+      }, 300);
+    }
+  }
+  
+  function goCalStep(n) {
+    document.querySelectorAll('.cal-step').forEach(el => el.classList.remove('active'));
+    document.getElementById(`cal-step-${n}`).classList.add('active');
+    
+    if (n === 2) {
+      renderCalendarDays();
+    }
+    if (n === 3) {
+      document.getElementById('sum-vehicle').textContent = 
+        TD_STATE.vehicle ? (TD_STATE.vehicle.trim ? `${TD_STATE.vehicle.model} ${TD_STATE.vehicle.trim}` : TD_STATE.vehicle.model) : '-';
+      document.getElementById('sum-datetime').textContent = formatSummaryDateTime();
+    }
+  }
+  
+  // 차량 선택 화면 (Step 1 모달 내부)
+  function renderCalVehicleList() {
+    const listEl = document.getElementById('cal-vehicle-list');
+    if (!TD_VEHICLES.length) {
+      listEl.innerHTML = '<div class="td-empty">시승 가능 차량 정보를 불러올 수 없습니다.</div>';
+      return;
+    }
+    listEl.innerHTML = TD_VEHICLES.map((v, idx) => `
+      <div class="td-card" onclick="selectVehicleInModal(${idx})">
+        <div class="td-name">${escapeHtml(v.model)}</div>
+
+      </div>
+    `).join('');
+  }
+  
+  function selectVehicleInModal(idx) {
+    TD_STATE.vehicle = TD_VEHICLES[idx];
+    goCalStep(2);
+  }
+  
+  // ===== 날짜 캘린더 =====
+  function renderCalendarDays() {
+    const daysEl = document.getElementById('cal-days');
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
+    const startOffset = TD_STATE.weekOffset * 7;
+    
+    let html = '';
+    const dates = [];
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(today);
+      d.setDate(today.getDate() + startOffset + i);
+      dates.push(d);
+      
+      const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+      const dateStr = formatDate(d);
+      const isSelected = TD_STATE.date === dateStr;
+      
+      // 14일 이내만 가능
+      const daysFromToday = Math.floor((d - today) / 86400000);
+      const disabled = daysFromToday > 13 || daysFromToday < 0;
+      
+      html += `
+        <button class="cal-day ${isWeekend ? 'weekend' : ''} ${isSelected ? 'selected' : ''} ${disabled ? 'disabled' : ''}"
+                ${disabled ? 'disabled' : `onclick="selectDate('${dateStr}')"`}>
+          <div class="cal-day-week">${weekDays[d.getDay()]}</div>
+          <div class="cal-day-num">${d.getDate()}</div>
+        </button>
+      `;
+    }
+    daysEl.innerHTML = html;
+    
+    // 주차 라벨
+    const startMonth = dates[0].getMonth() + 1;
+    const startDate = dates[0].getDate();
+    const endDate = dates[6].getDate();
+    document.getElementById('cal-week-label').textContent = `${startMonth}월 ${startDate}일 ~ ${endDate}일`;
+    
+    // 페이지 네비 활성화
+    document.getElementById('cal-prev').disabled = TD_STATE.weekOffset <= 0;
+    document.getElementById('cal-next').disabled = TD_STATE.weekOffset >= 1;
+    
+    // 시간 슬롯 초기화
+    const timesEl = document.getElementById('cal-times');
+    if (!TD_STATE.date) {
+      timesEl.innerHTML = '<div class="td-loading" style="grid-column: 1 / -1;">날짜를 먼저 선택해주세요.</div>';
+    } else {
+      renderTimeSlots();
+    }
+    
+    updateStep2Next();
+  }
+  
+  function changeWeek(delta) {
+    const newOffset = TD_STATE.weekOffset + delta;
+    if (newOffset < 0 || newOffset > 1) return;
+    TD_STATE.weekOffset = newOffset;
+    renderCalendarDays();
+  }
+  
+  function selectDate(dateStr) {
+    TD_STATE.date = dateStr;
+    TD_STATE.time = null;
+    renderCalendarDays();
+  }
+  
+  function renderTimeSlots() {
+    const timesEl = document.getElementById('cal-times');
+    // 60분 단위 슬롯, 10시 ~ 17시 (마지막 슬롯은 17:00 ~ 18:00)
+    const slots = ['10:00', '11:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
+    timesEl.innerHTML = slots.map(t => `
+      <button class="cal-time ${TD_STATE.time === t ? 'selected' : ''}" onclick="selectTime('${t}')">
+        ${t}
+      </button>
+    `).join('');
+  }
+  
+  function selectTime(t) {
+    TD_STATE.time = t;
+    renderTimeSlots();
+    updateStep2Next();
+  }
+  
+  function updateStep2Next() {
+    const btn = document.getElementById('cal-step2-next');
+    btn.disabled = !(TD_STATE.date && TD_STATE.time);
+  }
+  
+  // ===== 유틸: 날짜 포맷 =====
+  function formatDate(d) {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${dd}`;
+  }
+  
+  function formatSummaryDateTime() {
+    if (!TD_STATE.date || !TD_STATE.time) return '-';
+    const [y, m, d] = TD_STATE.date.split('-');
+    const dt = new Date(parseInt(y), parseInt(m) - 1, parseInt(d));
+    const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
+    const dayName = dayNames[dt.getDay()];
+    return `${parseInt(m)}월 ${parseInt(d)}일 (${dayName}) ${TD_STATE.time}`;
+  }
+  
+  // ===== 예약 제출 =====
+  function submitTestDrive() {
+    const name = document.getElementById('td-name').value.trim();
+    const phone = document.getElementById('td-phone').value.trim();
+    const memo = document.getElementById('td-memo').value.trim();
+    
+    if (!name) { showToast('성함을 입력해주세요'); document.getElementById('td-name').focus(); return; }
+    if (!phone || phone.replace(/\D/g, '').length < 10) {
+      showToast('올바른 연락처를 입력해주세요');
+      document.getElementById('td-phone').focus();
+      return;
+    }
+    
+    const v = TD_STATE.vehicle;
+    const subject = `[시승 예약 신청] ${v.model} ${v.trim} - ${name}`;
+    const body = [
+      `안녕하세요, ${CONTACT.name} ${CONTACT.title}님.`,
+      ``,
+      `디지털 명함을 통해 시승을 신청합니다.`,
+      ``,
+      `■ 차량: ${v.model} ${v.trim}`,
+      `■ 컬러: ${v.color}`,
+      `■ 시승 일시: ${formatSummaryDateTime()}`,
+      `■ 소요시간: ${v.duration}`,
+      `■ 성함: ${name}`,
+      `■ 연락처: ${phone}`,
+      memo ? `■ 희망 트림·색상: ${memo}` : '',
+      ``,
+      `예약 확정 연락 부탁드립니다.`,
+      `감사합니다.`
+    ].filter(Boolean).join('\n');
+    
+    // SMS로 담당자에게 실시간 전송
+    const smsBody = [
+      '[시승 예약] ' + v.model + (v.trim ? ' ' + v.trim : ''),
+      '',
+      '■ 차량: ' + v.model + (v.trim ? ' ' + v.trim : ''),
+      v.color ? '■ 컬러: ' + v.color : '',
+      '■ 시승 일시: ' + formatSummaryDateTime(),
+      '■ 성함: ' + name,
+      '■ 연락처: ' + phone,
+      memo ? '■ 희망 트림·색상: ' + memo : '',
+      '',
+      '디지털 명함을 통한 시승 예약입니다.'
+    ].filter(Boolean).join(String.fromCharCode(10));
+    window.location.href = 'sms:' + CONTACT.mobile.replace(/-/g,'') + '?body=' + encodeURIComponent(smsBody);
+    
+    // 완료 화면 표시
+    document.getElementById('cal-success-detail').innerHTML = `
+      <div class="cal-form-summary-row"><strong>차량</strong><span>${escapeHtml(v.model)}${v.trim ? ' ' + escapeHtml(v.trim) : ''}</span></div>
+      <div class="cal-form-summary-row"><strong>일시</strong><span>${escapeHtml(formatSummaryDateTime())}</span></div>
+      <div class="cal-form-summary-row"><strong>예약자</strong><span>${escapeHtml(name)} / ${escapeHtml(phone)}</span></div>
+    `;
+    goCalStep(4);
+  }
+  
+  // 페이지 로드 시 차량 정보 로드
+  document.addEventListener('DOMContentLoaded', loadTestDriveVehicles);
+  
+  // ============================================================
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    new QRCode(document.getElementById('qrcode'), {
+      text: window.location.href,
+      width: 96,
+      height: 96,
+      colorDark: '#131313',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  });
+</script>
+</body>
+</html>
