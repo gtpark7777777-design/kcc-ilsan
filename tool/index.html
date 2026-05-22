@@ -600,9 +600,14 @@ body.home-active .home-view{
 .approach-view:fullscreen .ap-fallback,
 .approach-view:-webkit-full-screen .ap-fallback,
 .approach-view:fullscreen .ap-controls,
-.approach-view:-webkit-full-screen .ap-controls,
+.approach-view:-webkit-full-screen .ap-controls{display:none !important}
+/* 풀스크린에서도 좌우 네비 화살표 유지 — 페이지 이동 필수 */
 .approach-view:fullscreen .ap-nav-arrow,
-.approach-view:-webkit-full-screen .ap-nav-arrow{display:none !important}
+.approach-view:-webkit-full-screen .ap-nav-arrow{
+    background:rgba(255,255,255,0.85);
+    box-shadow:0 4px 18px rgba(0,0,0,0.4);
+    z-index:10001;
+}
 .approach-view:fullscreen .ap-frame-wrap,
 .approach-view:-webkit-full-screen .ap-frame-wrap{
     border:0;background:#000;min-height:0;
@@ -1387,6 +1392,52 @@ select.config-select:focus{outline:none;border-color:var(--text)}
 .ap-controls{display:none !important}
 
 /* ========================================
+   페이지 썸네일 스트립 — 상단 가로 한 줄, 클릭 시 해당 페이지로 이동
+   ======================================== */
+.ap-thumb-strip{
+    display:flex;flex-direction:row;flex-wrap:nowrap;
+    gap:6px;padding:8px 12px;
+    background:#1a1a1a;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    overflow-x:auto;overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;scrollbar-color:#666 #1a1a1a;
+    flex-shrink:0;
+}
+.ap-thumb-strip::-webkit-scrollbar{height:6px}
+.ap-thumb-strip::-webkit-scrollbar-thumb{background:#666;border-radius:3px}
+.ap-thumb-strip::-webkit-scrollbar-track{background:transparent}
+.ap-thumb{
+    flex-shrink:0;display:flex;flex-direction:column;align-items:center;
+    background:transparent;border:0;padding:0;margin:0;
+    cursor:pointer;transition:transform 0.15s;
+    position:relative;
+}
+.ap-thumb:hover{transform:translateY(-2px)}
+.ap-thumb-canvas{
+    display:block;width:70px;height:auto;max-height:92px;
+    border:2px solid rgba(255,255,255,0.15);
+    background:#fff;border-radius:2px;
+    object-fit:cover;
+}
+.ap-thumb.active .ap-thumb-canvas{
+    border-color:#d4af37;
+    box-shadow:0 0 0 1px #d4af37, 0 4px 12px rgba(212,175,55,0.4);
+}
+.ap-thumb-num{
+    font-size:10px;color:rgba(255,255,255,0.55);
+    font-variant-numeric:tabular-nums;
+    margin-top:3px;letter-spacing:0.04em;
+    font-weight:500;
+}
+.ap-thumb.active .ap-thumb-num{color:#d4af37;font-weight:700}
+@media(max-width:700px){
+    .ap-thumb-strip{padding:6px 8px;gap:4px}
+    .ap-thumb-canvas{width:56px;max-height:74px}
+    .ap-thumb-num{font-size:9px}
+}
+
+/* ========================================
    모바일/태블릿 — 어프로치북 컴팩트 + 컨트롤 숨김
    ======================================== */
 @media(max-width:900px){
@@ -1415,8 +1466,13 @@ body.ap-mobile-fs .price-bar,
 body.ap-mobile-fs .configurator,
 body.ap-mobile-fs #approachView .ap-head,
 body.ap-mobile-fs #approachView .ap-controls,
-body.ap-mobile-fs #approachView .ap-nav-arrow,
 body.ap-mobile-fs .ap-fallback{display:none !important}
+/* 풀스크린에서도 좌우 화살표 유지 + 더 잘 보이게 */
+body.ap-mobile-fs #approachView .ap-nav-arrow{
+    background:rgba(255,255,255,0.85) !important;
+    box-shadow:0 4px 18px rgba(0,0,0,0.45) !important;
+    z-index:10001 !important;
+}
 body.ap-mobile-fs{overflow:hidden !important}
 body.ap-mobile-fs .layout{padding:0 !important;margin:0 !important}
 body.ap-mobile-fs .stage{padding:0 !important;margin:0 !important;background:#fff}
@@ -1595,6 +1651,8 @@ body.ap-mobile-fs .ap-fs-close:active{background:rgba(0,0,0,0.85)}
                     <button class="ap-btn solid" id="apFullscreenBtn">전체 화면</button>
                 </div>
             </div>
+            <!-- 페이지 썸네일 스트립 (상단 가로 한 줄) — 모든 페이지 미리보기 + 클릭 시 즉시 이동 -->
+            <div class="ap-thumb-strip" id="apThumbStrip" role="navigation" aria-label="페이지 썸네일"></div>
             <div class="ap-frame-wrap" id="apFrameWrap">
                 <div class="ap-pdfjs-wrap" id="apPdfjsWrap">
                     <button class="ap-nav-arrow left" id="apPrevArrow" type="button" aria-label="이전 페이지">‹</button>
@@ -4185,6 +4243,8 @@ window._apPageNum=1;
         renderPage(1);
         // Auto fit-page on load (한 페이지가 화면에 모두 보이게)
         setTimeout(fitPage,200);
+        /* 썸네일 스트립 렌더링 — PDF 로드 직후 비동기로 모든 페이지 미리보기 생성 */
+        setTimeout(function(){if(typeof renderThumbnails==='function') renderThumbnails();}, 400);
         /* 모바일/태블릿 첫 진입: 차량 정보 탭이 active이면 자동 풀스크린 */
         setTimeout(function(){
             if(window.innerWidth < 1100){
@@ -4197,8 +4257,83 @@ window._apPageNum=1;
         }, 600);
     });
 
-    function goPrev(){if(window._apPageNum>1){window._apPageNum--;renderPage(window._apPageNum);fitPage();}}
-    function goNext(){if(window._apPageNum<pageCount){window._apPageNum++;renderPage(window._apPageNum);fitPage();}}
+    function goPrev(){if(window._apPageNum>1){window._apPageNum--;renderPage(window._apPageNum);fitPage();updateThumbActive();}}
+    function goNext(){if(window._apPageNum<pageCount){window._apPageNum++;renderPage(window._apPageNum);fitPage();updateThumbActive();}}
+    /* 외부(썸네일 스트립 등)에서 사용할 수 있도록 노출 */
+    window._apGoPrev=goPrev;window._apGoNext=goNext;
+    window._apGoToPage=function(n){if(n>=1 && n<=pageCount){window._apPageNum=n;renderPage(n);fitPage();updateThumbActive();}};
+
+    /* 터치 스와이프 좌→다음 / 우→이전 페이지 */
+    var _touchStartX=0,_touchStartY=0,_touchEndX=0,_touchEndY=0,_touchMoved=false;
+    function _handleTouchStart(e){var t=e.changedTouches[0];_touchStartX=t.screenX;_touchStartY=t.screenY;_touchMoved=false;}
+    function _handleTouchMove(e){_touchMoved=true;}
+    function _handleTouchEnd(e){
+        var t=e.changedTouches[0];_touchEndX=t.screenX;_touchEndY=t.screenY;
+        var dx=_touchEndX-_touchStartX, dy=_touchEndY-_touchStartY;
+        /* 가로 이동이 세로 이동보다 크고, 50px 이상일 때만 스와이프로 인식 */
+        if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.5){
+            if(dx<0) goNext(); else goPrev();
+        }
+    }
+    if(wrap){
+        wrap.addEventListener('touchstart',_handleTouchStart,{passive:true});
+        wrap.addEventListener('touchmove',_handleTouchMove,{passive:true});
+        wrap.addEventListener('touchend',_handleTouchEnd,{passive:true});
+    }
+
+    /* === 썸네일 스트립 === */
+    var thumbStrip=document.getElementById('apThumbStrip');
+    var thumbsRendered=false;
+    function updateThumbActive(){
+        if(!thumbStrip) return;
+        var items=thumbStrip.querySelectorAll('.ap-thumb');
+        items.forEach(function(it){
+            if(parseInt(it.dataset.page,10)===window._apPageNum){
+                it.classList.add('active');
+                /* 활성 썸네일이 보이도록 자동 스크롤 */
+                try{it.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});}catch(_){}
+            }else{
+                it.classList.remove('active');
+            }
+        });
+    }
+    function renderThumbnails(){
+        if(thumbsRendered || !thumbStrip || !pdfDoc) return;
+        thumbsRendered=true;
+        thumbStrip.innerHTML='';
+        for(var i=1;i<=pageCount;i++){
+            (function(pageNum){
+                var item=document.createElement('button');
+                item.className='ap-thumb';
+                item.type='button';
+                item.dataset.page=pageNum;
+                item.title='페이지 '+pageNum;
+                var cv=document.createElement('canvas');
+                cv.className='ap-thumb-canvas';
+                var lbl=document.createElement('span');
+                lbl.className='ap-thumb-num';
+                lbl.textContent=pageNum;
+                item.appendChild(cv);
+                item.appendChild(lbl);
+                item.addEventListener('click',function(){window._apGoToPage(pageNum);});
+                thumbStrip.appendChild(item);
+                /* 비동기 렌더 — 한 페이지씩 그려서 UI 블로킹 방지 */
+                pdfDoc.getPage(pageNum).then(function(page){
+                    var vp=page.getViewport({scale:1});
+                    /* 썸네일 너비 고정 70px → 비율 맞춰 높이 계산 */
+                    var thumbW=70, sc=thumbW/vp.width;
+                    var sv=page.getViewport({scale:sc});
+                    cv.width=sv.width;cv.height=sv.height;
+                    cv.style.width=sv.width+'px';cv.style.height=sv.height+'px';
+                    page.render({canvasContext:cv.getContext('2d'),viewport:sv}).promise.then(function(){
+                        if(pageNum===window._apPageNum) item.classList.add('active');
+                    });
+                });
+            })(i);
+        }
+    }
+    /* PDF 로드 완료 후 썸네일 렌더링 트리거 (외부에서 호출 가능) */
+    window._apRenderThumbnails=renderThumbnails;
 
     document.getElementById('apPrev').onclick=goPrev;
     document.getElementById('apNext').onclick=goNext;
