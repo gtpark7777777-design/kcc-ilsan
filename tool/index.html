@@ -453,6 +453,24 @@ body.home-active .home-view{
     .home-cta{padding:15px 36px;font-size:14px;letter-spacing:0.22em}
 }
 
+/* === 재고 자료 암호 게이트 === */
+.kcc-gate{display:none;flex:1;align-items:center;justify-content:center;min-height:420px;padding:40px 20px;
+    background:linear-gradient(160deg,#0d1b2a 0%,#14293d 100%);border-radius:10px}
+.kcc-gate-box{width:min(380px,90vw);text-align:center;background:#fff;border-radius:14px;
+    padding:38px 30px 30px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.kcc-gate-ico{font-size:34px;line-height:1;margin-bottom:14px}
+.kcc-gate-title{font-size:18px;font-weight:700;color:#0d1b2a;letter-spacing:-0.01em}
+.kcc-gate-sub{font-size:13px;color:#6b7785;margin:8px 0 22px;line-height:1.55}
+.kcc-gate-form{display:flex;gap:8px}
+.kcc-gate-input{flex:1;min-width:0;padding:12px 14px;border:1px solid #d5dae0;border-radius:8px;
+    font-size:15px;letter-spacing:.06em;outline:none;background:#fbfcfd;color:#0d1b2a}
+.kcc-gate-input:focus{border-color:#0d1b2a;background:#fff}
+.kcc-gate-btn{padding:12px 20px;border:0;border-radius:8px;background:#0d1b2a;color:#fff;
+    font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.kcc-gate-btn:disabled{opacity:.55;cursor:default}
+.kcc-gate-err{min-height:18px;margin-top:12px;font-size:12.5px;color:#c0392b;font-weight:600}
+.kcc-gate-foot{margin-top:16px;font-size:11.5px;color:#9aa4ae;letter-spacing:.02em}
+
 /* 재고표 줌 버튼 */
 .ap-btn-zoom{
     padding:8px 12px;background:#fff;color:var(--text);
@@ -2190,7 +2208,20 @@ body.ap-mobile-fs .ap-fs-close:active{background:rgba(0,0,0,0.85)}
                     <span class="ap-zoom-label" id="invZoomLabel">100%</span>
                     <button class="ap-btn-zoom" data-zoom-target="inventory" data-zoom="+" title="확대 (Ctrl/⌘ + +)">+</button>
                     <button class="ap-btn-zoom" data-zoom-target="inventory" data-zoom="0" title="원래 크기 (Ctrl/⌘ + 0)">초기화</button>
-                    <a class="ap-btn solid" href="https://docs.google.com/spreadsheets/d/1DDfe6K9WttZkisBP4CqahiQDd1gT1SkTThp4rM8fGc0/edit?gid=0#gid=0" target="_blank" rel="noopener">구글시트에서 열기</a>
+                    <a class="ap-btn solid" id="invSheetBtn" style="display:none" target="_blank" rel="noopener">구글시트에서 열기</a>
+                </div>
+            </div>
+            <div class="kcc-gate" id="invGate">
+                <div class="kcc-gate-box">
+                    <div class="kcc-gate-ico">&#128274;</div>
+                    <div class="kcc-gate-title">재고표 열람 암호</div>
+                    <div class="kcc-gate-sub">KCC오토모빌 일산 사내 전용 자료입니다.<br>열람 암호를 입력해 주세요.</div>
+                    <form class="kcc-gate-form" onsubmit="return kccGateSubmit(event,'inventory')">
+                        <input type="password" id="invGatePw" class="kcc-gate-input" placeholder="암호 입력" autocomplete="off" spellcheck="false">
+                        <button type="submit" class="kcc-gate-btn">열기</button>
+                    </form>
+                    <div class="kcc-gate-err" id="invGateErr"></div>
+                    <div class="kcc-gate-foot">KCC AUTOMOBILE ILSAN · INTERNAL ONLY</div>
                 </div>
             </div>
             <div class="ap-frame-wrap" id="inventoryFrameWrap">
@@ -2208,10 +2239,23 @@ body.ap-mobile-fs .ap-fs-close:active{background:rgba(0,0,0,0.85)}
                     <div class="vh-tagline">실시간 재고 현황 및 통계 대시보드입니다.</div>
                 </div>
                 <div class="ap-actions">
-                    <a class="ap-btn solid" href="https://gtpark7777777-design.github.io/kcc-inventory/" target="_blank" rel="noopener">새 창에서 열기</a>
+                    <a class="ap-btn solid" id="dashOpenBtn" style="display:none" target="_blank" rel="noopener">새 창에서 열기</a>
                 </div>
             </div>
-            <div class="ap-frame-wrap">
+            <div class="kcc-gate" id="dashGate">
+                <div class="kcc-gate-box">
+                    <div class="kcc-gate-ico">&#128274;</div>
+                    <div class="kcc-gate-title">대시보드 열람 암호</div>
+                    <div class="kcc-gate-sub">KCC오토모빌 일산 사내 전용 자료입니다.<br>열람 암호를 입력해 주세요.</div>
+                    <form class="kcc-gate-form" onsubmit="return kccGateSubmit(event,'dashboard')">
+                        <input type="password" id="dashGatePw" class="kcc-gate-input" placeholder="암호 입력" autocomplete="off" spellcheck="false">
+                        <button type="submit" class="kcc-gate-btn">열기</button>
+                    </form>
+                    <div class="kcc-gate-err" id="dashGateErr"></div>
+                    <div class="kcc-gate-foot">KCC AUTOMOBILE ILSAN · INTERNAL ONLY</div>
+                </div>
+            </div>
+            <div class="ap-frame-wrap" id="dashboardFrameWrap">
                 <iframe class="ap-frame" id="dashboardFrame" src="" title="KCC 대시보드" style="flex:1;width:100%;border:0;min-height:680px;background:#fff"></iframe>
             </div>
         </div>
@@ -4900,8 +4944,8 @@ function showView(name){
     else if(name==='brand'){var brd=document.getElementById('brandView');if(brd)brd.style.display='flex';}
     else if(name==='kccgroup'){if(kgrp)kgrp.style.display='flex';}
     else if(name==='defacc'){if(d){d.style.display='flex';}}
-    else if(name==='inventory'){if(inv){inv.style.display='flex';var ifr=document.getElementById('inventoryFrame');if(ifr&&!ifr.src.includes('google'))ifr.src='https://docs.google.com/spreadsheets/d/1DDfe6K9WttZkisBP4CqahiQDd1gT1SkTThp4rM8fGc0/htmlembed?gid=0';}}
-    else if(name==='dashboard'){if(dash){dash.style.display='flex';var dfr=document.getElementById('dashboardFrame');if(dfr&&!dfr.src.includes('kcc-inventory'))dfr.src='https://gtpark7777777-design.github.io/kcc-inventory/';}}
+    else if(name==='inventory'){if(inv){inv.style.display='flex';kccGateShow('inventory');}}
+    else if(name==='dashboard'){if(dash){dash.style.display='flex';kccGateShow('dashboard');}}
     else if(name==='vinsearch'){if(vins){vins.style.display='flex';}document.body.classList.add('vinsearch-mode');return;}
     else if(name==='calc'){
         const hasResult=document.getElementById('itemsList')&&document.getElementById('itemsList').children.length>0;
@@ -5418,9 +5462,58 @@ function showOptionPopup(code, desc, row){
 }
 
 
+/* === 재고 자료 암호 잠금 (PBKDF2-SHA256 250k + AES-GCM 256) === */
+var KCC_LOCK={s:'n5J8DrN+GdOs56d9KM6bqA==',i:'i9W3uvOXgvNWCECn',c:'pzY0DRo9Q6Ze6LAqtKiFqKuTB1CSTTyPV7R/npFDOXoLwDEVOb3n3Zf9aHSZWKFci2cGHcXBiOWRyscq2cZiwxjsKyl7jOMf7LP0O4YEroHTFXexpOUbQP1szEG1oUo3+oRuDehFyU0ZFbUJFeuOvajYycJcX6wLC2IbrzdUFScENK3hWaXwKtCZ5R53EM27uevgZuG9TjcZ+g5+F3Td3a7YVB4P7dfZikYOBwvr2oN98B6YlctezMxeFZ3BacHosKZfMIz3EX3KOxtKJsBqIdt+cl8gqhTPAzAJxWo8w4lNiLqk57k6qxp6cgbHFZ5ke2qNKo6eA8xCuaMYqZSlmTrssJT7B+nTSfXtINaH8q/g9Qvo/ILYQMwSB5aDIvyqK5aAnMwyFfIQgoHAlPxA',n:250000};
+function _kb64(x){var b=atob(x),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u;}
+function _kccCfg(w){return w==='inventory'
+    ?{g:'invGate',w:'inventoryFrameWrap',f:'inventoryFrame',p:'invGatePw',e:'invGateErr',b:'invSheetBtn'}
+    :{g:'dashGate',w:'dashboardFrameWrap',f:'dashboardFrame',p:'dashGatePw',e:'dashGateErr',b:'dashOpenBtn'};}
+function kccGateShow(which){
+    var c=_kccCfg(which);
+    var g=document.getElementById(c.g),wr=document.getElementById(c.w),f=document.getElementById(c.f),
+        b=document.getElementById(c.b),p=document.getElementById(c.p),e=document.getElementById(c.e);
+    if(f)f.src='about:blank';
+    if(wr)wr.style.display='none';
+    if(b){b.style.display='none';b.removeAttribute('href');}
+    if(e)e.textContent='';
+    if(g)g.style.display='flex';
+    if(p){p.value='';setTimeout(function(){try{p.focus();}catch(_){}} ,180);}
+}
+function kccDecrypt(pw){
+    if(!(window.crypto&&window.crypto.subtle))return Promise.reject(new Error('no-subtle'));
+    var enc=new TextEncoder();
+    return crypto.subtle.importKey('raw',enc.encode(pw),{name:'PBKDF2'},false,['deriveKey'])
+    .then(function(km){return crypto.subtle.deriveKey(
+        {name:'PBKDF2',salt:_kb64(KCC_LOCK.s),iterations:KCC_LOCK.n,hash:'SHA-256'},
+        km,{name:'AES-GCM',length:256},false,['decrypt']);})
+    .then(function(key){return crypto.subtle.decrypt({name:'AES-GCM',iv:_kb64(KCC_LOCK.i)},key,_kb64(KCC_LOCK.c));})
+    .then(function(pt){return JSON.parse(new TextDecoder().decode(new Uint8Array(pt)));});
+}
+function kccGateSubmit(ev,which){
+    ev.preventDefault();
+    var c=_kccCfg(which);
+    var p=document.getElementById(c.p),e=document.getElementById(c.e);
+    var btn=ev.target.querySelector('button');
+    if(e)e.textContent='';
+    if(btn){btn.disabled=true;btn.textContent='확인 중…';}
+    kccDecrypt(p?p.value:'').then(function(d){
+        var g=document.getElementById(c.g),wr=document.getElementById(c.w),
+            f=document.getElementById(c.f),b=document.getElementById(c.b);
+        if(f)f.src=(which==='inventory'?d.inv:d.dash);
+        if(wr)wr.style.display='';
+        if(b){b.href=(which==='inventory'?d.edit:d.dash);b.style.display='';}
+        if(g)g.style.display='none';
+        if(p)p.value='';
+    }).catch(function(err){
+        if(e)e.textContent=(err&&err.message==='no-subtle')?'이 브라우저에서는 잠금 해제를 지원하지 않습니다.':'암호가 올바르지 않습니다.';
+        if(p){p.value='';try{p.focus();}catch(_){}}
+    }).then(function(){if(btn){btn.disabled=false;btn.textContent='열기';}});
+    return false;
+}
+
 /* === VIN 검색 기능 === */
 (function(){
-    var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1DDfe6K9WttZkisBP4CqahiQDd1gT1SkTThp4rM8fGc0/gviz/tq?tqx=out:csv&gid=0';
+    var SHEET_CSV_URL = ['https://docs.google.com/spreadsheets/d/', atob('MUREZmU2SzlXdHRaa2lzQlA0Q3FhaGlRRGQxZ1QxU2tUVGhwNHJNOGZHYzA='), '/gviz/tq?tqx=out:csv&gid=0'].join('');
     var _sheetCache = null;
     var _sheetCacheTime = 0;
     
