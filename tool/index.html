@@ -5513,7 +5513,8 @@ function kccGateSubmit(ev,which){
 
 /* === VIN 검색 기능 === */
 (function(){
-    var SHEET_CSV_URL = ['https://docs.google.com/spreadsheets/d/', atob('MUREZmU2SzlXdHRaa2lzQlA0Q3FhaGlRRGQxZ1QxU2tUVGhwNHJNOGZHYzA='), '/gviz/tq?tqx=out:csv&gid=0'].join('');
+    /* 2026-08-20 복구: 원본 시트 링크공유 차단(401)으로 gviz 접근 불가 -> 웹게시(pub) CSV 사용 */
+    var SHEET_CSV_URL = ['https://docs.google.com/spreadsheets/d/e/', atob('MlBBQ1gtMXZRWG9FQ1AxZEFPblhTY1V0ZG1pNzlSQjdObV9fRE02ZUxIZ0ZZVzVJYWpHQXNoV0FBalQ1NjR1bXg1U3N3ZFp3b3pvRzhNdi1JR0xXVTY='), '/pub?gid=0&single=true&output=csv'].join('');
     var _sheetCache = null;
     var _sheetCacheTime = 0;
     
@@ -5657,8 +5658,19 @@ function kccGateSubmit(ev,which){
         if(rows.length < 2) throw new Error('데이터 없음');
         var header = rows[0];
         var idx = {};
+        /* 2026-08-20: 시트 헤더 표기 변경 대응 — 공백 무시 + 별칭 매칭 */
+        var HEADER_ALIAS = {
+            'ORDER NO': ['ORDER NO','ORDERNO','오더넘버','오더번호'],
+            '등록완료일': ['등록완료일','등록 완료일']
+        };
+        function norm(s){ return (s==null?'':String(s)).replace(/\s+/g,'').toUpperCase(); }
         ['ORDER NO','Model','Engine','MY','Ext.Color','Ext.Code','Int.Color','Int.Code','차대번호','옵션','항구 도착 예정일','기본MSRP','추가옵션','입고일','전시지점','계약서번호','계약일','배정일','출고일','등록완료일','지점','출고지','담당','고객','Remark'].forEach(function(name){
-            idx[name] = header.indexOf(name);
+            var i = header.indexOf(name);
+            if(i === -1){
+                var cands = (HEADER_ALIAS[name] || [name]).map(norm);
+                i = header.findIndex(function(h){ return cands.indexOf(norm(h)) !== -1; });
+            }
+            idx[name] = i;
         });
         // ★MSRP★ 컬럼 (멀티라인 헤더, ★ 마크 우선)
         idx['MSRP'] = header.findIndex(function(h){ return h && h.indexOf('★MSRP★') !== -1; });
