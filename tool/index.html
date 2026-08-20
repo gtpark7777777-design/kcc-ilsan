@@ -599,6 +599,7 @@ body.home-active .home-view{
     white-space:nowrap;
 }
 .vs-badge-stock{background:#e8f5e9;color:#2e7d32}
+.vs-badge-pending{background:#e3f2fd;color:#1565c0}
 .vs-badge-display{background:#fff8e1;color:#f57f17}
 .vs-badge-contract{background:#e3f2fd;color:#1565c0}
 .vs-badge-assigned{background:#f3e5f5;color:#6a1b9a}
@@ -5468,8 +5469,26 @@ function _kb64(x){var b=atob(x),u=new Uint8Array(b.length);for(var i=0;i<b.lengt
 function _kccCfg(w){return w==='inventory'
     ?{g:'invGate',w:'inventoryFrameWrap',f:'inventoryFrame',p:'invGatePw',e:'invGateErr',b:'invSheetBtn'}
     :{g:'dashGate',w:'dashboardFrameWrap',f:'dashboardFrame',p:'dashGatePw',e:'dashGateErr',b:'dashOpenBtn'};}
+var KCC_UNLOCKED=null;
+/* 2026-08-20: 암호 1회 입력으로 재고표·대시보드 양쪽 동시 해제 */
+function kccApplyUnlock(d){
+    KCC_UNLOCKED=d;
+    [['inventory',d.inv,d.edit],['dashboard',d.dash,d.dash]].forEach(function(t){
+        var cc=_kccCfg(t[0]);
+        var g=document.getElementById(cc.g),wr=document.getElementById(cc.w),
+            f=document.getElementById(cc.f),b=document.getElementById(cc.b),
+            p=document.getElementById(cc.p),e=document.getElementById(cc.e);
+        if(f && f.getAttribute('src')!==t[1]) f.src=t[1];
+        if(wr)wr.style.display='';
+        if(b){b.href=t[2];b.style.display='';}
+        if(g)g.style.display='none';
+        if(e)e.textContent='';
+        if(p)p.value='';
+    });
+}
 function kccGateShow(which){
     var c=_kccCfg(which);
+    if(KCC_UNLOCKED){ kccApplyUnlock(KCC_UNLOCKED); return; }
     var g=document.getElementById(c.g),wr=document.getElementById(c.w),f=document.getElementById(c.f),
         b=document.getElementById(c.b),p=document.getElementById(c.p),e=document.getElementById(c.e);
     if(f)f.src='about:blank';
@@ -5497,13 +5516,7 @@ function kccGateSubmit(ev,which){
     if(e)e.textContent='';
     if(btn){btn.disabled=true;btn.textContent='확인 중…';}
     kccDecrypt(p?p.value:'').then(function(d){
-        var g=document.getElementById(c.g),wr=document.getElementById(c.w),
-            f=document.getElementById(c.f),b=document.getElementById(c.b);
-        if(f)f.src=(which==='inventory'?d.inv:d.dash);
-        if(wr)wr.style.display='';
-        if(b){b.href=(which==='inventory'?d.edit:d.dash);b.style.display='';}
-        if(g)g.style.display='none';
-        if(p)p.value='';
+        kccApplyUnlock(d);   /* 재고표·대시보드 동시 해제 */
     }).catch(function(err){
         if(e)e.textContent=(err&&err.message==='no-subtle')?'이 브라우저에서는 잠금 해제를 지원하지 않습니다.':'암호가 올바르지 않습니다.';
         if(p){p.value='';try{p.focus();}catch(_){}}
@@ -5741,7 +5754,16 @@ function kccGateSubmit(ev,which){
         if(displayBranch){
             return {label:'🚙 전시', detail: '전시지점: '+displayBranch, badgeClass: 'vs-badge-display'};
         }
-        // 즉시 출고 가능
+        // 한국 미입항(입고일 공란) = 통관 전 → 즉시출고 아님
+        var inboundDate = get('입고일');
+        var portArrival = get('항구 도착 예정일');
+        var purchaseType = get('매입');
+        if(!inboundDate && (portArrival || purchaseType === '배정')){
+            return {label:'🚢 입항대기',
+                    detail: (portArrival ? '항구도착 '+portArrival+' · 통관 약 10일 소요' : '통관 전'),
+                    badgeClass: 'vs-badge-pending'};
+        }
+        // 즉시 출고 가능 (입고일 존재 = 통관 완료)
         return {label:'⚡ 즉시출고', detail: '', badgeClass: 'vs-badge-stock'};
     }
     
@@ -5763,6 +5785,25 @@ function kccGateSubmit(ev,which){
         return s;
     }
     
+    /* 2026-08-20: 출고가능시기 = 입고일 있으면 즉시, 없으면 항구도착 + 10일(통관) */
+    function parseKDate(s){
+        if(!s) return null;
+        s = String(s).trim();
+        var m = s.match(/(\d{4})\D+(\d{1,2})\D+(\d{1,2})/);
+        if(m) return new Date(parseInt(m[1],10), parseInt(m[2],10)-1, parseInt(m[3],10));
+        m = s.match(/^(\d{1,2})\s*[-./월]\s*(\d{1,2})/);
+        if(m) return new Date(new Date().getFullYear(), parseInt(m[1],10)-1, parseInt(m[2],10));
+        return null;
+    }
+    function calcDelivery(r, idx){
+        var g = function(name){ return idx[name]>=0 ? (r[idx[name]]||'').trim() : ''; };
+        if(g('입고일')) return '즉시 출고';
+        var d = parseKDate(g('항구 도착 예정일'));
+        if(!d) return fmtDelivery(g('항구 도착 예정일'));
+        d.setDate(d.getDate() + 10);
+        return d.getFullYear() + '. ' + (d.getMonth()+1) + '. ' + d.getDate();
+    }
+
     /* VIN 검색 실행 */
     async function runSearch(){
         var input = document.getElementById('vinInput').value || '';
@@ -5861,7 +5902,7 @@ function kccGateSubmit(ev,which){
                     html += '<td>' + (r[idx['Engine']]||'') + '</td>';
                     html += '<td>' + (r[idx['Ext.Color']]||'') + '</td>';
                     html += '<td>' + (r[idx['Int.Color']]||'') + '</td>';
-                    html += '<td>' + fmtDelivery(r[idx['항구 도착 예정일']]) + '</td>';
+                    html += '<td>' + calcDelivery(r, idx) + '</td>';
                     
                     // 차량 상태 (계약/이슈/보관/전시/출고/즉시출고)
                     var status = determineStatus(r, idx);
@@ -5906,7 +5947,7 @@ function kccGateSubmit(ev,which){
                         vin: r[idx['차대번호']]||'',
                         extColor: r[idx['Ext.Color']]||'',
                         intColor: r[idx['Int.Color']]||'',
-                        delivery: fmtDelivery(r[idx['항구 도착 예정일']]),
+                        delivery: calcDelivery(r, idx),
                         statusLabel: status.label,
                         statusDetail: status.detail,
                         opts: paidOpts,
