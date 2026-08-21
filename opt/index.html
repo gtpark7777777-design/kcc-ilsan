@@ -118,7 +118,7 @@ button.g{background:var(--gold)}
 </style>
 </head>
 <body>
-<!-- VIN-SEARCH-ADDON v1.0 | KCC오토모빌 일산 | 재고표 연동 차대번호 검색 -->
+<!-- VIN-SEARCH-ADDON v1.1 | KCC오토모빌 일산 | 재고표 연동 차대번호 검색 -->
 
 <header><h1>CXP 랜드로버 — 모델별 옵션코드 · 옵션가 마스터</h1>
 <p>출처: CXP &gt; 링크 &gt; Vehicle Option Search (모델 탭) · 추출일 2026-08-20 · KCC오토모빌 일산 (딜러코드 01073)</p></header>
@@ -206,7 +206,7 @@ var TABS=[
   {gid:'763419697',    label:'대기재고'}
 ];
 
-var INV=[], INVMAP=new Map(), LOADED=false;
+var INV=[], INVMAP=new Map(), LOADED=false, CURMY=String();
 
 /* ---------- CSV ---------- */
 function parseCSV(t){
@@ -436,10 +436,17 @@ function matchVariant(v){
 function splitCodes(s){
   return String(s==null?'':s).split(/[,\s/+;]+/).map(function(x){return x.trim().toUpperCase();}).filter(Boolean);
 }
+function vrMY(vr){ var g=String(vr||'').match(/\(([\d.]+)MY\)/); return g?g[1].replace('.','').slice(0,2):''; }
 function lookup(code,variant){
   var k,d;
   if(variant){
     for(k=0;k<variant.idx.length;k++){ d=DATA.d[variant.idx[k]]; if(d[0]===code) return {name:d[1],price:d[2],src:'트림'}; }
+    for(k=0;k<DATA.v.length;k++){
+      if(DATA.v[k][0]!==variant.m) continue;
+      if(!CURMY || vrMY(DATA.v[k][1])!==CURMY) continue;
+      var ixm=DATA.v[k][4];
+      for(var jm=0;jm<ixm.length;jm++){ d=DATA.d[ixm[jm]]; if(d[0]===code) return {name:d[1],price:d[2],src:'동일MY'}; }
+    }
     for(k=0;k<DATA.v.length;k++){
       if(DATA.v[k][0]!==variant.m) continue;
       var ix=DATA.v[k][4];
@@ -495,6 +502,7 @@ function showVin(vin){
   var v=INVMAP.get(vin); if(!v) return;
   var b=box(); if(!b) return;
   var variant=matchVariant(v);
+  CURMY=myOf(v.my);
   var codes=splitCodes(v.opt);
   var rows=[], paid=0, free=0, sum=0, miss=0;
   codes.forEach(function(c){
