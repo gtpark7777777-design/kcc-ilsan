@@ -115,6 +115,9 @@ button.g{background:var(--gold)}
 .vchkt{margin-top:6px}
 .vchkt td{border-bottom:1px solid var(--line);padding:6px 10px;font-size:12.5px}
 .vchkt tr.diff td{background:#fbeceb;color:#a3352b;font-weight:600}
+.vchkt tr.tot td{background:var(--navy);color:var(--gold);font-weight:700;font-size:13.5px}
+.vchkt tr.sub td{color:var(--mut);font-size:12px}
+.vb.basicb{background:#e9f0fa;color:#1f4b8f;border-color:#c9dcf3}
 </style>
 </head>
 <body>
@@ -140,7 +143,7 @@ button.g{background:var(--gold)}
   <div><b id="k4">3869</b><span>유상 옵션 행</span></div>
  </div>
  <div class="sum" id="sum"></div>
- <div class="hint">· 첫 행(코드 <b>5002xxxxxxx</b>)은 <b>차량 기본가(MSRP)</b>이며 옵션이 아닙니다. · <b>003KR</b>은 한국형 필수 사양(₩0). · 동일 옵션코드라도 <b>모델·연식(MY)에 따라 가격이 다릅니다</b> — 반드시 해당 트림 행의 가격을 사용하세요. · 트림을 하나만 선택하면 하단에 <b>차량가+선택옵션 합계</b> 요약이 표시됩니다. · <b>차대번호(VIN)</b>를 검색창에 입력하면 재고표와 연동되어 해당 차량의 장착 옵션 · 옵션가 합계 · 출고가능시기가 표시됩니다(전체 17자리 또는 뒤 6자리).</div>
+ <div class="hint">· 첫 행(코드 <b>5002xxxxxxx</b>)은 <b>차량 기본가(MSRP)</b>이며 옵션이 아닙니다. · <b>003KR</b>은 한국형 필수 사양(₩0). · <b>AC01 Accident Care(10만) · DH01 DashCam(60만) 합계 70만원은 전 차량 기본 장착</b>이므로 차량 기본가에 항상 포함됩니다. · <b>차대번호 검색 시 금액 기준은 재고표</b>이며, 옵션 마스터 가격은 참고용입니다. · 동일 옵션코드라도 <b>모델·연식(MY)에 따라 가격이 다릅니다</b> — 반드시 해당 트림 행의 가격을 사용하세요. · 트림을 하나만 선택하면 하단에 <b>차량가+선택옵션 합계</b> 요약이 표시됩니다. · <b>차대번호(VIN)</b>를 검색창에 입력하면 재고표와 연동되어 해당 차량의 장착 옵션 · 옵션가 합계 · 출고가능시기가 표시됩니다(전체 17자리 또는 뒤 6자리).</div>
 </div>
 <div id="vinbox"></div>
 <div class="tbox"><table><thead><tr>
@@ -177,7 +180,8 @@ function render(){const f=cur();
  if(vs.value&&ms.value){const b=f.find(r=>r.base);const opts=f.filter(r=>!r.base&&r.p>0);
   const tot=opts.reduce((a,c)=>a+c.p,0);
   sm.style.display='block';
-  sm.innerHTML=`<b>${ms.value} / ${vs.value}</b> &nbsp;|&nbsp; 차량 기본가 <b>${won(b?b.p:0)}</b> &nbsp;|&nbsp; 유상옵션 ${opts.length}종 총액 <b>${won(tot)}</b> &nbsp;|&nbsp; 전 옵션 장착 시 <b>${won((b?b.p:0)+tot)}</b>`;
+  const bp0=b?b.p:0, BFIT=700000;
+  sm.innerHTML=`<b>${ms.value} / ${vs.value}</b> &nbsp;|&nbsp; 차량 기본가 <b>${won(bp0)}</b> + 기본장착(AC01·DH01) <b>${won(BFIT)}</b> = <b>${won(bp0+BFIT)}</b> &nbsp;|&nbsp; 유상옵션 ${opts.length}종 총액 <b>${won(tot)}</b> &nbsp;|&nbsp; 전 옵션 장착 시 <b>${won(bp0+BFIT+tot)}</b>`;
  } else sm.style.display='none';
 }
 function clr(){ms.value='';fillV();vs.value='';ps.value='';q.value='';render();}
@@ -198,6 +202,9 @@ fillV();render();
 'use strict';
 
 var PUB='https://docs.google.com/spreadsheets/d/e/2PACX-1vQXoECP1dAOnXScUtdmi79RB7Nm__DM6eLHgFYW5IajGAshWAAjT564umx5SswdZwozoG8Mv-IGLWU6/pub';
+/* 전 차량 기본 장착 사양 — 재고표 「옵션」칸 기재 여부와 무관하게 항상 포함 */
+var BASIC_FIT=[{c:'AC01',n:'Accident Care (사고대차 서비스)',p:100000},{c:'DH01',n:'DashCam (블랙박스)',p:600000}];
+var BASIC_SUM=700000;
 var TABS=[
   {gid:'0',            label:'전체재고'},
   {gid:'614839029',    label:'입항예정(익월)'},
@@ -275,7 +282,7 @@ function ingest(text,label){
     base  : pick(h,['기본MSRP'],['기본MSRP']),
     star  : pick(h,[],['★MSRP★']),
     cxp   : pick(h,[],['MSRP\n(옵션포함','옵션포함']),
-    addo  : pick(h,['추가옵션'],[]),
+    addo  : pick(h,['추가옵션','옵션가','추가옵션가'],['추가옵션','옵션가']),
     shop  : pick(h,['전시지점'],['전시지점']),
     lng   : pick(h,[],['장기재고']),
     sc    : pick(h,['담당'],['담당']),
@@ -503,8 +510,10 @@ function showVin(vin){
   var b=box(); if(!b) return;
   var variant=matchVariant(v);
   CURMY=myOf(v.my);
-  var codes=splitCodes(v.opt);
+  var BF={}; BASIC_FIT.forEach(function(x){ BF[x.c]=1; });
+  var codes=splitCodes(v.opt).filter(function(c){ return !BF[c]; });
   var rows=[], paid=0, free=0, sum=0, miss=0;
+  BASIC_FIT.forEach(function(x){ rows.push({c:x.c,n:x.n,p:x.p,src:'basic'}); });
   codes.forEach(function(c){
     if(variant && c===variant.code){ rows.push({c:c,n:'★ 차량 기본 사양 코드 (옵션 아님)',p:null,src:'base'}); return; }
     var r=lookup(c,variant);
@@ -513,9 +522,16 @@ function showVin(vin){
     rows.push({c:c,n:(c==='003KR'?'한국형 필수 사양 (₩0)':(r.name===c?'옵션명 미기재':r.name)),p:r.price,src:r.src});
   });
 
-  var optCount = rows.filter(function(r){ return r.src!=='base'; }).length;
-  var sheetBase = num(v.base), sheetCxp = num(v.cxp), sheetStar = num(v.star);
-  var calc = (sheetBase||(variant?variant.base:0)) + sum;
+  var optCount = rows.filter(function(r){ return r.src!=='base' && r.src!=='basic'; }).length;
+  var sheetBase = num(v.base), sheetCxp = num(v.cxp), sheetStar = num(v.star), sheetAddo = num(v.addo);
+  var baseMsrp = sheetBase || (variant?variant.base:0);
+  /* 금액 기준은 무조건 재고표 — 옵션 마스터 계산값은 참고용 */
+  var sheetOpt = sheetAddo || ((sheetCxp&&baseMsrp)?(sheetCxp-baseMsrp):0);
+  var optSrc   = sheetAddo ? '재고표 기준' : ((sheetCxp&&baseMsrp)?'재고표 MSRP옵션포함 − 기본MSRP':'');
+  if(!sheetOpt && sum){ sheetOpt = sum; optSrc = '옵션 마스터 계산(재고표 값 없음)'; }
+  if(!optSrc) optSrc = '재고표 기준';
+  var carBase  = baseMsrp ? (baseMsrp + BASIC_SUM) : 0;
+  var calc     = (carBase||baseMsrp) + sheetOpt;
   var dv = delivery(v);
 
   var h='';
@@ -539,34 +555,42 @@ function showVin(vin){
 
   h+='<table class="vtab"><thead><tr><th style="width:14%">옵션코드</th><th>옵션명</th>'+
      '<th style="width:14%" class="num">옵션가(원)</th><th style="width:12%">구분</th></tr></thead><tbody>';
-  if(!rows.length) h+='<tr><td colspan="4" class="vnone">재고표 「옵션」 칸이 비어 있습니다 (추가 장착 옵션 없음).</td></tr>';
+  if(!codes.length) h+='<tr><td colspan="4" class="vnone">재고표 「옵션」 칸에 추가 장착 옵션이 없습니다 (기본 장착 사양만 적용).</td></tr>';
   rows.forEach(function(r){
     var kind = (r.src==='base')?'<span class="vb tab">차량 기본</span>'
+             : (r.src==='basic')?'<span class="vb basicb">기본 장착</span>'
              : (r.p===null)?'<span class="vb err">미확인</span>'
              : (r.p>0?'<span class="vb paidb">유상</span>':'<span class="vb freeb">기본·NCO</span>');
     h+='<tr><td class="mono code">'+esc(r.c)+'</td><td>'+esc(r.n)+
        '</td><td class="num '+(r.p>0?'paid':'zero')+'">'+(r.p===null?'—':W(r.p))+
-       '</td><td>'+kind+(r.src&&r.src!=='트림'&&r.src!=='-'&&r.src!=='base'?' <span class="vsrc">('+esc(r.src)+' 기준)</span>':'')+'</td></tr>';
+       '</td><td>'+kind+(r.src&&r.src!=='트림'&&r.src!=='-'&&r.src!=='base'&&r.src!=='basic'?' <span class="vsrc">('+esc(r.src)+' 기준)</span>':'')+'</td></tr>';
   });
   h+='</tbody></table>';
 
   h+='<div class="vsum">'+
-     '<div><span>추가 장착 옵션</span><b>'+optCount+'종</b></div>'+
-     '<div><span>유상 옵션</span><b>'+paid+'종</b></div>'+
-     '<div><span>기본 · NCO(₩0)</span><b>'+free+'종</b></div>'+
-     '<div class="hi"><span>유상 옵션 합계</span><b>'+W(sum)+'</b></div>'+
+     '<div><span>추가 장착 옵션</span><b>'+optCount+'종 <span style="font-size:12px;color:#6b7885">(유상 '+paid+' · NCO '+free+')</span></b></div>'+
+     '<div><span>기본 장착 (AC01+DH01)</span><b>'+W(BASIC_SUM)+'</b></div>'+
+     '<div><span>추가 옵션 합계 (재고표)</span><b>'+W(sheetOpt)+'</b></div>'+
+     '<div class="hi"><span>최종 차량가 (재고표 기준)</span><b>'+W(calc)+'</b></div>'+
      '</div>';
 
-  h+='<div class="vchk"><b>재고표 금액 대조</b><table class="vchkt"><tbody>'+
-     tr2('기본 MSRP (재고표)', sheetBase?W(sheetBase):'—')+
-     tr2('차량 기본가 (옵션 마스터 · 매칭 트림)', (variant&&variant.base>0)?W(variant.base):'—')+
-     tr2('유상 옵션 합계 (본 도구 계산)', W(sum))+
-     tr2('기본 MSRP + 옵션 합계', W(calc))+
+  h+='<div class="vchk"><b>재고표 기준 금액 산출</b><table class="vchkt"><tbody>'+
+     tr2('기본 MSRP (재고표)', baseMsrp?W(baseMsrp):'—')+
+     tr2('기본 장착 AC01 Accident Care', W(100000), 'sub')+
+     tr2('기본 장착 DH01 DashCam', W(600000), 'sub')+
+     tr2('차량 기본가 (기본 장착 포함)', carBase?W(carBase):'—')+
+     tr2('추가 옵션 합계 · '+optSrc, W(sheetOpt))+
+     tr2('최종 차량가 = 차량 기본가 + 추가 옵션', W(calc), 'tot')+
+     '</tbody></table>'+
+     '<b style="display:block;margin-top:12px">재고표 원본 대조</b><table class="vchkt"><tbody>'+
      tr2('MSRP 옵션포함 (재고표 · CXP 기재금액)', sheetCxp?W(sheetCxp):'—')+
      tr2('★MSRP★ (재고표)', sheetStar?W(sheetStar):'—')+
-     (sheetCxp?tr2('차이 (계산 − 재고표 옵션포함)', W(calc-sheetCxp), Math.abs(calc-sheetCxp)>1000?'diff':''):'')+
+     (sheetStar&&baseMsrp?tr2('★MSRP★ 검산 (기본MSRP + 기본장착 70만)', W(baseMsrp+BASIC_SUM), (Math.abs(sheetStar-(baseMsrp+BASIC_SUM))>1000?'diff':'')):'')+
+     (sheetCxp?tr2('MSRP 옵션포함 + 기본장착 70만', W(sheetCxp+BASIC_SUM), (Math.abs((sheetCxp+BASIC_SUM)-calc)>1000?'diff':'')):'')+
+     tr2('참고 · 옵션 마스터 계산 옵션합계', W(sum)+(Math.abs(sum-sheetOpt)>1000?' <span class="warn">(재고표와 '+W(Math.abs(sum-sheetOpt))+' 차이 — 재고표 기준 적용)</span>':''), 'sub')+
      '</tbody></table>'+
      (miss?'<div class="vnote warn">※ 옵션 마스터에 없는 코드 '+miss+'건 — CXP 옵션표 추출일 이후 신규 코드일 수 있습니다.</div>':'')+
+     '<div class="vnote">※ 금액 기준은 <b>재고표</b>입니다. 옵션 마스터 가격은 옵션명 · 단가 확인용 참고값이며 합계에는 사용하지 않습니다.</div>'+
      '</div>';
 
   b.innerHTML=h; b.style.display='block';
@@ -576,7 +600,8 @@ function showVin(vin){
     var t='[차량 옵션 조회] '+v.vin+'\n'+v.model+' / '+v.engine+' / '+v.my+'MY / '+v.extC+'\n'+
           '출고가능시기: '+b.querySelector('.vdel').innerText.replace(/^출고가능시기\s*/,'')+'\n'+
           rows.map(function(r){return ' · '+r.c+' '+r.n+' '+(r.p===null?'(미확인)':W(r.p));}).join('\n')+
-          '\n유상옵션 '+paid+'종 합계 '+W(sum)+' / 기본MSRP '+(sheetBase?W(sheetBase):'—')+' / 합계 '+W(calc);
+          '\n기본MSRP '+(baseMsrp?W(baseMsrp):'—')+' + 기본장착(AC01·DH01) '+W(BASIC_SUM)+' = 차량기본가 '+(carBase?W(carBase):'—')+
+          '\n추가옵션 합계(재고표 기준) '+W(sheetOpt)+' → 최종 차량가 '+W(calc);
     if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t); cp.textContent='복사됨 ✓'; setTimeout(function(){cp.textContent='결과 복사';},1500); }
   };
 
