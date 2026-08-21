@@ -377,7 +377,7 @@ function afterFile(){
 /* ---------- 모델/트림 매칭 ---------- */
 var LMAP={L460:'New Range Rover',L461:'New Range Rover Sport',L560:'Range Rover Velar',
           L551:'Range Rover Evoque',L462:'Discovery',L550:'Discovery Sport',L663:'Defender'};
-function norm(s){ return String(s==null?'':s).toUpperCase().replace(/[^A-Z0-9]/g,''); }
+function norm(s){ return String(s==null?'':s).toUpperCase().replace(/[^A-Z0-9]/g,'').replace(/DYNAMIC/g,'DYN').replace(/EDITION/g,'ED').replace(/XDYNAMIC/g,'XDYN'); }
 
 function baseModel(v){
   var m=String(v.model||'');
@@ -416,6 +416,19 @@ function matchVariant(v){
   if(!pool.length) DATA.v.forEach(function(r,i){ pool.push({i:i,m:r[0],vr:r[1],code:r[2],base:r[3],idx:r[4]}); });
 
   var eng=norm(v.engine), my2=myOf(v.my);
+  /* 파워트레인 코드(D250/D300/P400/P530/P550e …) 불일치 트림은 절대 매칭하지 않음 */
+  var ptM=String(v.engine||'').toUpperCase().match(/([PDE]\d{3})/);
+  var pt=ptM?ptM[1]:'';
+  if(pt){
+    var samePT=pool.filter(function(c){ return norm(c.vr).indexOf(pt)>=0; });
+    if(!samePT.length) return null;
+    pool=samePT;
+  }
+  /* 재고표 MY와 동일한 연식 트림이 존재하면 반드시 그 안에서만 매칭 (연식별 옵션가가 다름) */
+  if(my2){
+    var sameMY=pool.filter(function(c){ var g=c.vr.match(/\(([\d.]+)MY\)/); return g && g[1].replace('.','').slice(0,2)===my2; });
+    if(sameMY.length) pool=sameMY;
+  }
   var engTok=String(v.engine||'').toUpperCase().split(/[^A-Z0-9.]+/).filter(Boolean);
   var best=null,bs=-1;
   pool.forEach(function(c){
