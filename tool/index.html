@@ -5471,7 +5471,10 @@ function _kccCfg(w){return w==='inventory'
     :{g:'dashGate',w:'dashboardFrameWrap',f:'dashboardFrame',p:'dashGatePw',e:'dashGateErr',b:'dashOpenBtn'};}
 var KCC_UNLOCKED=null;
 /* 2026-08-20: 암호 1회 입력으로 재고표·대시보드 양쪽 동시 해제 */
+/* 2026-08-21: 대시보드 주소 변경 → kcc-inventory/stock.html (암호블록 값 오버라이드) */
+var KCC_DASH_URL = 'https://gtpark7777777-design.github.io/kcc-inventory/stock.html';
 function kccApplyUnlock(d){
+    try{ d = {inv:d.inv, edit:d.edit, dash:KCC_DASH_URL}; }catch(_){}
     KCC_UNLOCKED=d;
     [['inventory',d.inv,d.edit],['dashboard',d.dash,d.dash]].forEach(function(t){
         var cc=_kccCfg(t[0]);
