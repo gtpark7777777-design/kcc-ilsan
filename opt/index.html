@@ -54,6 +54,8 @@ button.g{background:var(--gold)}
 .vinstat.err{color:#a3352b}
 .vinstat.load{color:var(--mut)}
 .vinstat .warn{color:#a3352b}
+.vinstat .sub{color:var(--mut);font-weight:400}
+.vinstat .vinshow{flex:0 0 100%;margin-top:2px;color:#1c4f8b;background:#eef4fb;border:1px solid #cfe0f2;border-radius:6px;padding:4px 9px}
 .vinstat button.vinreload{padding:3px 9px;border:1px solid var(--line);background:#fff;border-radius:6px;font-size:12px;cursor:pointer;color:var(--mut)}
 .vinstat label.vinfile{border:1px solid var(--line);border-radius:6px;padding:3px 9px;cursor:pointer;background:#fff;color:var(--txt)}
 .vinstat label.vinfile input{display:none}
@@ -212,7 +214,7 @@ var TABS=[
   {gid:'763419697',    label:'대기재고'}
 ];
 
-var INV=[], INVMAP=new Map(), LOADED=false, CURMY=String();
+var INV=[], INVMAP=new Map(), LOADED=false, CURMY=String(), TABCNT={};
 
 /* ---------- CSV ---------- */
 function parseCSV(t){
@@ -288,11 +290,12 @@ function ingest(text,label){
     cust  : pick(h,['고객'],['고객'])
   };
   if(C.vin<0) return 0;
-  var n=0;
+  var n=0, tot=0;
   for(var r=hi+1;r<rows.length;r++){
     var row=rows[r];
     var vin=tidy(row[C.vin]).toUpperCase();
     if(vin.length<10) continue;
+    tot++;
     var v={
       vin:vin, tab:label,
       opt   : C.opt<0?'':tidy(row[C.opt]),
@@ -321,9 +324,32 @@ function ingest(text,label){
     }
     INVMAP.set(vin,v); INV.push(v); n++;
   }
+  TABCNT[label]=(TABCNT[label]||0)+tot;
   return n;
 }
 
+/* 탭별 원본 행수 요약 — 중복 선점(로드 순서)에 영향받지 않는 실제 탭 등록 대수 */
+function tabSummary(ok){
+  var parts=[];
+  TABS.forEach(function(t){
+    if(ok.indexOf(t.label)<0) return;
+    var lb=(t.label==='전시차')?'전시차(탭)':t.label;
+    parts.push(lb+' '+(TABCNT[t.label]||0));
+  });
+  return parts.join(' · ');
+}
+/* 「전시지점」 컬럼 기준 실제 전시차 집계 — 일산 / 전사 */
+function showroomSummary(){
+  var mine=0, mineK=0, all=0, allK=0;
+  INV.forEach(function(v){
+    var s=v.shop||'';
+    if(s.indexOf('전시차')>=0){ all++; if(s.indexOf('일산')>=0) mine++; }
+    else if(s.indexOf('보관차')>=0){ allK++; if(s.indexOf('일산')>=0) mineK++; }
+  });
+  if(!all && !allK) return '';
+  return '<span class="vinshow">🚗 전시지점 기준 — 일산 전시차 <b>'+mine+'대</b>'+(mineK?' <span class="sub">(보관 '+mineK+')</span>':'')+
+         ' · 전사 전시차 <b>'+all+'대</b>'+(allK?' <span class="sub">(보관 '+allK+')</span>':'')+'</span>';
+}
 function setStat(html,cls){
   var e=document.getElementById('vinstat');
   if(e){ e.innerHTML=html; e.className='vinstat '+(cls||''); }
@@ -331,11 +357,12 @@ function setStat(html,cls){
 
 function loadInv(){
   setStat('재고표 불러오는 중…','load');
+  TABCNT={};
   var okTabs=[], failTabs=[];
   var jobs=TABS.map(function(t){
     return fetch(tabUrl(t.gid),{cache:'no-store'})
       .then(function(r){ if(!r.ok) throw new Error(r.status); return r.text(); })
-      .then(function(txt){ var n=ingest(txt,t.label); okTabs.push(t.label+' '+n); })
+      .then(function(txt){ ingest(txt,t.label); okTabs.push(t.label); })
       .catch(function(){ failTabs.push(t.label); });
   });
   return Promise.all(jobs).then(function(){
@@ -345,9 +372,9 @@ function loadInv(){
               '<label class="vinfile">재고표 CSV 직접 열기<input type="file" id="vinfile" multiple accept=".csv,text/csv"></label>','err');
       bindFile();
     }else{
-      setStat('재고표 연동 완료 — <b>'+INV.length.toLocaleString()+'대</b> ('+okTabs.join(' · ')+')'+
+      setStat('재고표 연동 완료 — <b>'+INV.length.toLocaleString()+'대</b> <span class="sub">(차대번호 중복 제외)</span> · '+tabSummary(okTabs)+
               (failTabs.length?' <span class="warn">※ 미수신: '+failTabs.join(', ')+'</span>':'')+
-              ' · <button class="vinreload" type="button">새로고침</button>','ok');
+              ' · <button class="vinreload" type="button">새로고침</button>'+showroomSummary(),'ok');
       var rb=document.querySelector('.vinreload');
       if(rb) rb.onclick=function(){ INV=[]; INVMAP=new Map(); loadInv(); };
     }
